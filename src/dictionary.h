@@ -20,11 +20,11 @@ struct LinkedList{
 	int count;
 };
 
-
-typedef struct Dictionary {
-   char name[50];
-   char defination[100];
-} Dictionary;
+typedef struct Dictionary Dictionary;
+struct Dictionary{
+   char *name;
+   char *defination;
+};
  
 struct Node 
 {

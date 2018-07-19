@@ -28,18 +28,23 @@ void test_createLinkedList_try(void){
 	//printf(" data=%d\n ", head->data);
 	
 }
+/*
+ * create only 1st list in the linked list. 
+ * should piont to NULL and count is zero.
+ *
+ *	head-----		
+ *			|				
+ *	tail-----			
+ *			|				
+ *			NULL
+ *	count = 0			
+ */
 void test_listInit_given_a_new_structure_should_piont_to_NULL(void){
-	LinkedList list ={
-		(ListItem*)NULL,
-		(ListItem*)NULL,
-		10
-	};
-	listInit(&list);
-	TEST_ASSERT_NULL(list.head);		//NULL
-	TEST_ASSERT_NULL(list.tail);		//NULL
-	TEST_ASSERT_EQUAL(0,list.count);	//0
-	
-	
+	LinkedList listTest; 
+	listInit(&listTest);
+	TEST_ASSERT_NULL(listTest.head);		//NULL
+	TEST_ASSERT_NULL(listTest.tail);		//NULL
+	TEST_ASSERT_EQUAL(0,listTest.count);	//0
 }
 
 /**
