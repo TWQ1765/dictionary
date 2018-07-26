@@ -4,11 +4,13 @@ int addToDic(Dictionary * dictionary, char name, char definition){
 	
 	
 }
-
+	//linkedListAddToHead(&list, item);
 void linkedListAddToHead(LinkedList * linkedList , ListItem* listItem){
-	
+
+		//LinkedList  linkedList 
 	
 }
+
 //start a new structure that point to nothing.
 void listInit(LinkedList * list){
 	list->head=NULL;

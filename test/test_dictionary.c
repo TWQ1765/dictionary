@@ -59,20 +59,23 @@ void test_listInit_given_a_new_structure_should_piont_to_NULL(void){
  *	count = 0			count = 1
  *
  */
- /*
+///*
 void test_linkedListAddToHead_given_1_expect_item_inserted(void){
 	LinkedList list = {.head=NULL, .tail=NULL, .count=0};
 	int value = 1;
-	ListItem * item = {.next=NULL, .data=(void*)&value};
-	LinkedList list = {.head=NULL, .tail=NULL, .count=0};
+	ListItem itemData = {.next=NULL, .data=(void*)&value};
+	ListItem * item = &itemData;
 	
-	linkedListAddToHead(&list, item);
+	printf("item->data=%d\n",*(int*)((*item).data));
 	
-	TEST_ASSERT_EQUAL(item, list.head);
-	TEST_ASSERT_EQUAL(item, list.tail);
-	TEST_ASSERT_EQUAL(1, list.count);
+	//linkedListAddToHead(&list, item);
+	
+	TEST_ASSERT_EQUAL(1,item->data);
+	
+	//TEST_ASSERT_EQUAL(item, list.tail);
+	//TEST_ASSERT_EQUAL(1, list.count);
 }
-*/
+//*/
 /**
  *Strting from a Linked-List with item 1, add item 2 into it.
  *
