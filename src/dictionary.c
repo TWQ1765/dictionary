@@ -4,10 +4,20 @@ int addToDic(Dictionary * dictionary, char name, char definition){
 	
 	
 }
-	//linkedListAddToHead(&list, item);
+	
 void linkedListAddToHead(LinkedList * linkedList , ListItem* listItem){
-
-		//LinkedList  linkedList 
+	if(linkedList->count ==0){
+		linkedList -> head = listItem;
+		linkedList -> tail = listItem;
+		linkedList -> count += 1;
+		linkedList -> head -> next = NULL;
+	}
+	else{
+		//linkedList -> head = listItem;
+		//linkedList -> tail -> next = listItem;
+		//linkedList -> count += 1;
+		//linkedList -> head -> next = NULL;
+	}
 	
 }
 
@@ -47,6 +57,6 @@ void createLinkedList(struct Node* head,struct Node* second,struct Node* third){
 	
 	second->data = 3;
 	second->next = NULL;
-	printf("head->data = %d",head->data);
+	//printf("head->data = %d",head->data);
 }
 
