@@ -32,5 +32,5 @@ void linkedListAddToHead(LinkedList * linkList , ListItem* listItem);
 void listInit(LinkedList * list);
 void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem);
 void linkedListRemoveFrist(LinkedList * linkedList);
-
+void linkedListRemoveLast(LinkedList * linkedList);
 #endif // _DICTIONARY_H

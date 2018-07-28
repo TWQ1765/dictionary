@@ -59,6 +59,31 @@ void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem){
 }
 
 void linkedListRemoveFrist(LinkedList * linkedList){
+	ListItem* tempAddr = 0;
+	//*test something
+	//linkedList++;
+	//printf("\n")
+	//*/
+	if(linkedList->head == NULL){
+		linkedList->head = NULL;
+		linkedList->tail =NULL;
+		linkedList->count = 0;
+	}else{
+		tempAddr = linkedList->head->next;  
+		linkedList->head = tempAddr;
+		linkedList->count -= 1;
+	}
+}
+void linkedListRemoveLast(LinkedList * linkedList){
+	ListItem* tempAddr = 0;
 	
-	
+	if(linkedList->tail == NULL){
+		linkedList->head = NULL;
+		linkedList->tail =NULL;
+		linkedList->count = 0;
+	}else{
+		tempAddr = linkedList->tail;  
+		
+		linkedList->count -= 1;
+	}
 }

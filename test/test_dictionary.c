@@ -331,3 +331,30 @@ add_item_1_then_item_2_at_head_and_add_item_3_at_tail(void){
 	TEST_ASSERT_EQUAL(value2, *(int*)(list.head->data));
 	TEST_ASSERT_EQUAL(value3, *(int*)(list.head->next->next->data));
 }
+/**
+ *Strting from a Linked-List with item 2 then item 1 remove item 2.
+ *
+ *	before							after
+ *	head---> item2		item 1		head---> item 1
+ *  		 next-----> next-----  		 	 next-----
+ *	tail------------------^		|	tail-------^	 |
+ *								--					--
+ *	count = 2						count = 1
+ *
+ */
+void test_linkedListRemoveFrist_given_linked_list_with_item_2_and_item_1_expect_count_1(void){
+	
+	int value1 = 1,value2 = 2;
+	
+	ListItem  itemData1 = {.next=NULL, .data=(void*)&value1};
+	ListItem  itemData2 = {.next=&itemData1, .data=(void*)&value2};
+	LinkedList list = {.head=&itemData2, .tail=&itemData1, .count=2};
+	
+	linkedListRemoveFrist(&list);//REMOVE 1st
+	
+	TEST_ASSERT_EQUAL(&itemData1, list.head);
+	TEST_ASSERT_EQUAL(&itemData1, list.tail);
+	TEST_ASSERT_EQUAL(NULL, list.head->next);
+	TEST_ASSERT_EQUAL(NULL, list.tail->next);
+	TEST_ASSERT_EQUAL(1, list.count);
+}
