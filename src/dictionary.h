@@ -26,14 +26,11 @@ struct Dictionary{
    char *defination;
 };
  
-struct Node 
-{
-  int data;
-  struct Node *next;
-};
 
 
 void linkedListAddToHead(LinkedList * linkList , ListItem* listItem);
-void createLinkedList(struct Node* head,struct Node* second,struct Node* third);
 void listInit(LinkedList * list);
+void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem);
+void linkedListRemoveFrist(LinkedList * linkedList);
+
 #endif // _DICTIONARY_H

@@ -4,59 +4,61 @@ int addToDic(Dictionary * dictionary, char name, char definition){
 	
 	
 }
+/*
+ *  If(count == 0)				If(count != 0)
+ *	linkedList					linkedList
+ *		head--->listItem			head--->listItem(n)		listItem(n++)
+ *					data=1						data=n			data=n+1
+ *					next-----					next----------->next-----
+ *		tail-------^		|		tail-------------------------^		|
+ *		count = 1			--		count = n+1							--
+ */	
+void linkedListAddToHead(LinkedList* linkedList , ListItem* listItem){
 	
-void linkedListAddToHead(LinkedList * linkedList , ListItem* listItem){
-	if(linkedList->count ==0){
+	ListItem* previousAddr = 0;
+	if(linkedList->count == 0){
 		linkedList -> head = listItem;
 		linkedList -> tail = listItem;
 		linkedList -> count += 1;
 		linkedList -> head -> next = NULL;
 	}
 	else{
-		//linkedList -> head = listItem;
-		//linkedList -> tail -> next = listItem;
-		//linkedList -> count += 1;
-		//linkedList -> head -> next = NULL;
+		previousAddr = linkedList -> head;
+		linkedList -> head = listItem;
+		listItem -> next = previousAddr;
+		linkedList -> tail -> next = NULL;
+		linkedList -> count += 1;
 	}
-	
 }
 
 //start a new structure that point to nothing.
-void listInit(LinkedList * list){
+void listInit(LinkedList* list){
 	list->head=NULL;
 	list->tail=NULL;
 	list->count = 0;
 }
 
-/*
- * this function create a linked list  
- * 
- *	head---data = 1
- *	 |
- *	 node------->second-----data = 2
- *					|
- *					------------->third----data = 3
- *									|
- *									---------NULL
- */
-void createLinkedList(struct Node* head,struct Node* second,struct Node* third){
-	
-	head = NULL;
-    second = NULL;
-    third = NULL;
-	
-	head = (struct Node*)malloc(sizeof(struct Node)); 
-	second = (struct Node*)malloc(sizeof(struct Node));
-	third = (struct Node*)malloc(sizeof(struct Node));
-	
-	head->data = 1;
-	head->next = second;
-	
-	second->data = 2;
-	second->next = third;
-	
-	second->data = 3;
-	second->next = NULL;
-	//printf("head->data = %d",head->data);
+void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem){
+	ListItem* previousAddr = 0;
+	if(linkedList->count == 0){
+		linkedList -> head = listItem;
+		linkedList -> tail = listItem;
+		linkedList -> count += 1;
+		linkedList -> head -> next = NULL;
+	}
+	else{
+		linkedList -> count += 1;
+		previousAddr = linkedList -> tail;
+		//printf("previousAddr=%d\n",previousAddr);
+		//printf("linkedList->head->next=%d\n",linkedList->head->next);
+		linkedList -> tail = listItem;
+		previousAddr->next = listItem;
+		linkedList -> tail -> next = NULL;
+		//linkedList -> head -> next = listItem;
+	}
 }
 
+void linkedListRemoveFrist(LinkedList * linkedList){
+	
+	
+}
