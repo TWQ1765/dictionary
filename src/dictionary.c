@@ -1,14 +1,14 @@
 #include "dictionary.h"
 
-int addToDic(Dictionary * dictionary, char name, char definition){
-	
+int addToDictionary(LinkedList* linkedList, char nameDic, char definitionDic){
+	//Dictionary itemDictionary ={.name = nameDic, .definition = definitionDic};
 	
 }
 /*
  *  If(count == 0)				If(count != 0)
  *	linkedList					linkedList
- *		head--->listItem			head--->listItem(n)		listItem(n++)
- *					data=1						data=n			data=n+1
+ *		head--->listItem			head--->listItem(n++)		listItem
+ *					data=1						data(new)		data
  *					next-----					next----------->next-----
  *					perv-----		NULL<-------prev<-----------prev	|
  *		tail-------^		|		tail-------------------------^		|
@@ -35,13 +35,31 @@ void linkedListAddToHead(LinkedList* linkedList , ListItem* listItem){
 	}
 }
 
-//start a new structure that point to nothing.
+
+/*
+ * start a new structure that point to nothing.
+ *	head-----		
+ *			|				
+ *	tail-----			
+ *			|				
+ *			NULL
+ *	count = 0			
+ */
 void listInit(LinkedList* list){
 	list->head=NULL;
 	list->tail=NULL;
 	list->count = 0;
 }
-
+/*
+ *  If(count == 0)				If(count != 0)
+ *	linkedList					linkedList
+ *		head--->listItem			head--->listItem		listItem(n++)
+ *					data=1						data			data(new)
+ *					next-----					next----------->next-----
+ *					perv-----		NULL<-------prev<-----------prev	|
+ *		tail-------^		|		tail-------------------------^		|
+ *		count = 1			--		count = n+1							--
+ */	
 void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem){
 	ListItem* previousAddr = 0;
 	if(linkedList->count == 0){
@@ -65,10 +83,6 @@ void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem){
 
 void linkedListRemoveFrist(LinkedList * linkedList){
 	ListItem* tempAddr = 0;
-	//*test something
-	//linkedList++;
-	//printf("\n")
-	//*/
 	if(linkedList->head == NULL){
 		linkedList->head = NULL;
 		linkedList->tail =NULL;
@@ -76,6 +90,7 @@ void linkedListRemoveFrist(LinkedList * linkedList){
 	}else{
 		tempAddr = linkedList->head->next;  
 		linkedList->head = tempAddr;
+		linkedList->head->pervious = NULL;
 		linkedList->count -= 1;
 	}
 }
@@ -96,22 +111,75 @@ void linkedListRemoveLast(LinkedList * linkedList){
 		linkedList->count -= 1;
 	}
 }
-void linkedListSearchRemove(LinkedList * linkedList, int data){
+/* find the inputData stay in which item in the linkedList and match and remove that item.
+ * function needed:
+ * 1.) dataSearch;
+ * 2.) ...
+ * 3.) linkedListRemoveFrist;
+ * 4.) linkedListRemoveLast;
+ * 5.) listInit;
+ */
+void linkedListSearchRemove(LinkedList * linkedList, void* inputData){
+	ListItem *tempItem = dataSearch(linkedList, inputData);//find item addr
 	
-	
-	
-	
-}
-//Search data on LinkedList return the address of the ListItem
-ListItem* dataSearch(LinkedList * linkedList, void * inputData){
-	int value = 0;
-	ListItem  item = {.next = NULL , .data=(void*)&value};
-	LinkedList * tempList = linkedList;
-	if (linkedList->head == NULL){
-		linkedList -> head = &item;
-		return linkedList->head;
-	}else{
-		
-		//while(tempList->head->data != inputData);
+	ListItem * itemNext = tempItem->next;
+	ListItem * itemPerv = tempItem->pervious;
+	int numNext = 0;
+	if(itemNext == NULL && itemPerv != NULL)//the 1st item
+	{
+		linkedListRemoveLast(linkedList);
+	}
+	else if(itemNext != NULL && itemPerv == NULL)//the last item
+	{
+		linkedListRemoveFrist(linkedList);
+	}
+	else if(itemNext == NULL && itemPerv == NULL){ //only 1 item
+		listInit(linkedList);
+	}
+	else{
+		itemPerv -> next = itemNext;
+		itemNext -> pervious = itemPerv;
+		linkedList->count -= 1;
 	}
 }
+//Search data on LinkedList return the address of the ListItem
+//needed extral function like compareString;
+ListItem* dataSearch(LinkedList * linkedList, void* inputData){
+	
+	LinkedList * tempList = linkedList;
+	if (linkedList->head == NULL){
+		return NULL;
+	}else{
+		ListItem *tempItem = tempList->head;
+		/*just testing
+		
+		if (tempItem->next->next->data != inputData){//given 1
+		return (ListItem*)100;
+		}
+		else{
+			return (ListItem*)101;
+		}
+		*/
+		//printf("tempItem=%d\n",tempItem);
+		while((tempItem->data != inputData) ){//&& (tempItem!=NULL)
+			/*
+			if(tempItem == NULL){
+			printf("is null\n");
+			return tempItem = 0;
+		}else{
+			*/
+			tempItem = tempItem->next;
+			//printf("tempItem=%d\n",tempItem);
+		}
+		/*
+		if(tempItem == NULL){
+			printf("is null\n");
+			return tempItem = 0;
+		}else{
+			*/
+		return tempItem;
+		
+	}
+}
+
+void * getDataFormLinkList();

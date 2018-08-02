@@ -34,6 +34,6 @@ void listInit(LinkedList * list);
 void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem);
 void linkedListRemoveFrist(LinkedList * linkedList);
 void linkedListRemoveLast(LinkedList * linkedList);
-ListItem* dataSearch(LinkedList * linkedList, void * data);
-void linkedListSearchRemove(LinkedList * linkedList, int data);
+ListItem* dataSearch(LinkedList * linkedList, void * inputData);
+void linkedListSearchRemove(LinkedList * linkedList, void * inputData);
 #endif // _DICTIONARY_H
