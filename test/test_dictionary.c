@@ -465,3 +465,9 @@ void test_linkedListRemoveLast_given_item3_to_item2_then_item1_count_3_expect_co
 	TEST_ASSERT_EQUAL(NULL, list.tail->next);
 	TEST_ASSERT_EQUAL(2, list.count);
 }//*/
+
+void test_dataSearch_given_data_int_1_expect_return_addrest_item(void){
+	
+	
+	
+}
