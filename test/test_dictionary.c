@@ -24,7 +24,7 @@ void test_listInit_given_a_new_structure_should_piont_to_NULL(void){
 	TEST_ASSERT_NULL(listTest.tail);		//NULL
 	TEST_ASSERT_EQUAL(0,listTest.count);	//0
 }
-
+//*
 void test_testSomething_understanding_for_pointers(void){
 	LinkedList list = {.head=NULL, .tail=NULL, .count=0};
 	
@@ -64,7 +64,7 @@ void test_testSomething_understanding_for_pointers(void){
 	TEST_ASSERT_EQUAL_STRING("hi",((Dictionary*)(itemDictionary->data))->name);
 	TEST_ASSERT_EQUAL_STRING(defination2,((Dictionary*)(itemDictionary->data))->defination);
 }
-
+//*/
 /**
  *Strting from an empty Linked-List,add item 1 into it.
  *
@@ -77,6 +77,7 @@ void test_testSomething_understanding_for_pointers(void){
  *	count = 0			count = 1
  *
  */
+ //*
 void test_linkedListAddToHead_given_1_expect_item_inserted(void){
 	LinkedList list = {.head=NULL, .tail=NULL, .count=0};
 	int value = 1;
@@ -91,6 +92,7 @@ void test_linkedListAddToHead_given_1_expect_item_inserted(void){
 	TEST_ASSERT_EQUAL(item, list.tail);
 	TEST_ASSERT_EQUAL(1, list.count);
 }
+//*/
 /**
  *Strting from a Linked-List with item 1, add item 2 into it at head.
  *
@@ -102,6 +104,7 @@ void test_linkedListAddToHead_given_1_expect_item_inserted(void){
  *	count = 1				count = 2
  *
  */
+ //*
 void test_linkedListAddToHead_given_linked_list_with_item_1_add_item_2_expect_2_then_1(void){
 	
 	int value1 = 1,value2 = 2;
@@ -121,6 +124,7 @@ void test_linkedListAddToHead_given_linked_list_with_item_1_add_item_2_expect_2_
 	TEST_ASSERT_EQUAL(NULL, item1->next);
 	TEST_ASSERT_EQUAL(2, list.count);
 }
+//*/
 /**
  *Strting from a Linked-List with item 2, add item 3 into it at head.
  *
@@ -132,6 +136,7 @@ void test_linkedListAddToHead_given_linked_list_with_item_1_add_item_2_expect_2_
  *	count = 2			count = 3
  *
  */
+ //*
 void test_linkedListAddToHead_given_linked_list_with_item_2_add_item_3_expect_3_then_2(void){
 	
 	int value3 = 3,value2 = 2;
@@ -154,6 +159,7 @@ void test_linkedListAddToHead_given_linked_list_with_item_2_add_item_3_expect_3_
 	TEST_ASSERT_EQUAL(value2, *(int*)(list.head->next->data));
 	TEST_ASSERT_EQUAL(value3, *(int*)(list.head->data));
 }
+//*/
 /**
  *Strting from a Linked-List with item 2, add item 3 into it at tail.
  *
@@ -165,6 +171,7 @@ void test_linkedListAddToHead_given_linked_list_with_item_2_add_item_3_expect_3_
  *	count = 2						count = 3
  *
  */
+ //*
 void test_linkedListAddToTail_given_linked_list_with_item_2_add_item_3_expect_3_then_2(void){
 	
 	int value3 = 3,value2 = 2;
@@ -186,7 +193,7 @@ void test_linkedListAddToTail_given_linked_list_with_item_2_add_item_3_expect_3_
 	TEST_ASSERT_EQUAL(value3, *(int*)(list.head->next->data));
 	TEST_ASSERT_EQUAL(value2, *(int*)(list.head->data));
 }
-
+//*/
 /* testing whether LinkedList is update every time new item is added head or not.
  *
  *	before		after add head X1		after add head X2 		after add head X3
@@ -198,6 +205,7 @@ void test_linkedListAddToTail_given_linked_list_with_item_2_add_item_3_expect_3_
  *
  *
  */
+ //*
 void test_linkedListAddToHead_given_empty_linkedlist_count_is_0_expect_count_2_when_run_two_time(void){
 	
 	int value3 = 3,value2 = 2,value1 = 1;
@@ -238,6 +246,7 @@ void test_linkedListAddToHead_given_empty_linkedlist_count_is_0_expect_count_2_w
 	TEST_ASSERT_EQUAL(value2,*(int*)(list.head->next->data));
 	TEST_ASSERT_EQUAL(value1,*(int*)(list.head->next->next->data));
 }
+//*/
 /* testing whether LinkedList is update every time new item is added tail or not.
  *
  *	before		after add tail X1			after add tail X2
@@ -249,6 +258,7 @@ void test_linkedListAddToHead_given_empty_linkedlist_count_is_0_expect_count_2_w
  *
  *
  */
+ //*
 void test_linkedListAddToTail_given_empty_linkedlist_count_is_0_expect_count_2_when_run_two_time(void){
 	
 	int value3 = 3,value2 = 2,value1 = 1;
@@ -279,7 +289,7 @@ void test_linkedListAddToTail_given_empty_linkedlist_count_is_0_expect_count_2_w
 	TEST_ASSERT_EQUAL(value2,*(int*)(list.head->next->data));
 	TEST_ASSERT_EQUAL(2, list.count);
 }
-
+//*/
 /**
  * test from a empty Linked-List, add item 1 and item 2 into at head then add item3 at tail.
  *
@@ -291,6 +301,7 @@ void test_linkedListAddToTail_given_empty_linkedlist_count_is_0_expect_count_2_w
  *	count = 1				count = 2						count = 3
  *
  */
+ //*
 void test_linkedListAddToTail_And_linkedListAddToHead_given_empty_list_\
 add_item_1_then_item_2_at_head_and_add_item_3_at_tail(void){
 	
@@ -325,12 +336,14 @@ add_item_1_then_item_2_at_head_and_add_item_3_at_tail(void){
 	TEST_ASSERT_EQUAL(item3, list.tail);
 	TEST_ASSERT_EQUAL(item2, list.head);
 	TEST_ASSERT_EQUAL(item3, list.head->next->next);
+	TEST_ASSERT_EQUAL(item1, list.head->next->next->pervious);
 	TEST_ASSERT_EQUAL(NULL, item3->next);
 	TEST_ASSERT_EQUAL(3, list.count);
 	TEST_ASSERT_EQUAL(value1, *(int*)(list.head->next->data));
 	TEST_ASSERT_EQUAL(value2, *(int*)(list.head->data));
 	TEST_ASSERT_EQUAL(value3, *(int*)(list.head->next->next->data));
 }
+//*/
 /**
  *Strting from a Linked-List with item 2 then item 1 remove item 2.
  *
@@ -342,6 +355,7 @@ add_item_1_then_item_2_at_head_and_add_item_3_at_tail(void){
  *	count = 2						count = 1
  *
  */
+ //*
 void test_linkedListRemoveFrist_given_linked_list_with_item_2_and_item_1_expect_count_1(void){
 	
 	int value1 = 1,value2 = 2;
@@ -358,3 +372,96 @@ void test_linkedListRemoveFrist_given_linked_list_with_item_2_and_item_1_expect_
 	TEST_ASSERT_EQUAL(NULL, list.tail->next);
 	TEST_ASSERT_EQUAL(1, list.count);
 }
+//*/
+
+/**
+ *Strting from a Linked-List with item 2 then item 1 remove item 1.
+ *
+ *	before							after
+ *	head---> item2		item 1		head---> item 2
+ *  		 next-----> next-----  		 	 next-----
+	  NULL<--perv <-----perv	|	  NULL<--perv	 |
+ *	tail------------------^		|	tail-------^	 |
+ *								--					--
+ *	count = 2						count = 1
+ *
+ */
+//*
+void test_linkedListRemoveLast_given_item2_then_item1_count_2_expect_count_1(void){
+	int value1 = 1,value2 = 2;
+	ListItem  itemData2 = {.next=NULL,.pervious = NULL, .data=(void*)&value2};
+	ListItem  itemData1 = {.next=NULL,.pervious = NULL, .data=(void*)&value1};
+	
+	ListItem * item2 = &itemData2;
+	ListItem * item1 = &itemData1;
+	LinkedList list;
+	
+	listInit(&list);
+	TEST_ASSERT_NULL(list.head);		
+	TEST_ASSERT_NULL(list.tail);
+	TEST_ASSERT_EQUAL(0,list.count);
+	
+	linkedListAddToHead(&list, item1);
+	TEST_ASSERT_EQUAL(item1, list.head);
+	TEST_ASSERT_EQUAL(item1, list.tail);
+	TEST_ASSERT_EQUAL(NULL, list.head->next);
+	TEST_ASSERT_EQUAL(NULL, list.head->pervious);
+	TEST_ASSERT_EQUAL(1, list.count);
+	
+	linkedListAddToHead(&list,&itemData2);
+	TEST_ASSERT_EQUAL(item2, list.head);
+	TEST_ASSERT_EQUAL(item1, list.tail);
+	TEST_ASSERT_EQUAL(NULL, list.tail->next);
+	TEST_ASSERT_EQUAL(NULL, list.head->pervious);
+	TEST_ASSERT_EQUAL(item1, list.head->next);
+	TEST_ASSERT_EQUAL(item2, list.head->next->pervious);
+	TEST_ASSERT_EQUAL(2, list.count);
+	
+	linkedListRemoveLast(&list);
+	TEST_ASSERT_EQUAL(item2, list.head);
+	TEST_ASSERT_EQUAL(NULL, list.head->next);
+	TEST_ASSERT_EQUAL(item2, list.tail);
+	TEST_ASSERT_EQUAL(1, list.count);
+	
+	
+}//*/
+
+/**
+ *Strting from a Linked-List with item 3 to item 1 remove item 1.
+ *
+ *	before									after
+ *	head---> item3		item2 	item 1		head---> item 3		item2
+ *  		 next-----> next---->next---|			 next-----> next-----
+	  NULL<--perv <-----perv<----perv	|	  NULL<--perv<------perv	|
+ *	tail--------------------------^		|	tail----------------^	 	|
+ *										--								--
+ *	count = 3								count = 2
+ *
+ */
+//*
+void test_linkedListRemoveLast_given_item3_to_item2_then_item1_count_3_expect_count_2(void){
+	int value3 = 3,value2 = 2,value1 = 1;
+	
+	ListItem  itemData3 = {.next=NULL, .data=(void*)&value3};
+	ListItem  itemData2 = {.next=NULL, .data=(void*)&value2};
+	ListItem  itemData1 = {.next=NULL, .data=(void*)&value1};
+	
+	ListItem * item3 = &itemData3;
+	ListItem * item2 = &itemData2;
+	ListItem * item1 = &itemData1;
+	LinkedList list;
+	
+	listInit(&list);//tested
+	linkedListAddToHead(&list, item1);//tested
+	linkedListAddToHead(&list, item2);//tested
+	linkedListAddToHead(&list, item3);//tested
+	linkedListRemoveLast(&list);
+	
+	TEST_ASSERT_EQUAL(item3, list.head);
+	TEST_ASSERT_EQUAL(item2, list.head->next);
+	TEST_ASSERT_EQUAL(NULL, list.head->next->next);
+	TEST_ASSERT_EQUAL(item3, list.head->next->pervious);
+	TEST_ASSERT_EQUAL(item2, list.tail);
+	TEST_ASSERT_EQUAL(NULL, list.tail->next);
+	TEST_ASSERT_EQUAL(2, list.count);
+}//*/

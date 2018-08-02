@@ -10,6 +10,7 @@
 typedef struct ListItem ListItem;
 struct ListItem{
 	ListItem *next;
+	ListItem *pervious;
 	void *data;
 };
 
@@ -33,4 +34,6 @@ void listInit(LinkedList * list);
 void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem);
 void linkedListRemoveFrist(LinkedList * linkedList);
 void linkedListRemoveLast(LinkedList * linkedList);
+ListItem* dataSearch(LinkedList * linkedList, void * data);
+void linkedListSearchRemove(LinkedList * linkedList, int data);
 #endif // _DICTIONARY_H
