@@ -3,6 +3,7 @@
 
 typedef enum {
 	NO_ERROR,
+	DATA_NOT_FOUND,
 }ErrorCode;
 
 

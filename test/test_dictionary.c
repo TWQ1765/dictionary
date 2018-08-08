@@ -1,6 +1,9 @@
 #include "unity.h"
 #include "dictionary.h"
-
+#include "Error.h"
+#include 	<Exception.h>
+#include 	"Exception.h"
+#include 	"CException.h"
 void setUp(void)
 {}
 void tearDown(void)
@@ -66,7 +69,7 @@ void test_testSomething_understanding_for_pointers(void){
 }
 //*/
 /**
- *Strting from an empty Linked-List,add item 1 into it.
+ *Starting from an empty Linked-List,add item 1 into it.
  *
  *	before				after
  *	head-----			head---> item 1
@@ -94,7 +97,7 @@ void test_linkedListAddToHead_given_1_expect_item_inserted(void){
 }
 //*/
 /**
- *Strting from a Linked-List with item 1, add item 2 into it at head.
+ *Starting from a Linked-List with item 1, add item 2 into it at head.
  *
  *	before					after
  *	head--->item 1			head---> item 2		item1
@@ -126,7 +129,7 @@ void test_linkedListAddToHead_given_linked_list_with_item_1_add_item_2_expect_2_
 }
 //*/
 /**
- *Strting from a Linked-List with item 2, add item 3 into it at head.
+ *Starting from a Linked-List with item 2, add item 3 into it at head.
  *
  *	before				after
  *	head---> item 2		head---> item3		item 2		
@@ -161,14 +164,14 @@ void test_linkedListAddToHead_given_linked_list_with_item_2_add_item_3_expect_3_
 }
 //*/
 /**
- *Strting from a Linked-List with item 2, add item 3 into it at tail.
+ *Starting from a Linked-List with item 2, add item 3 into it at tail.
  *
  *	before				after
  *	head---> item2		head---> item2		item3	
  *  		 next-----			 next-----> next-----
  *	tail------^		 |	tail------------------^		|
  *					--								--
- *	count = 2						count = 3
+ *	count = 2			count = 3
  *
  */
  //*
@@ -201,7 +204,7 @@ void test_linkedListAddToTail_given_linked_list_with_item_2_add_item_3_expect_3_
  *  	    |  			 	 next----- 			next--->next--- 		next--->next--->next---
  *	tail----|		tail------^		 |	tail--------------^	  | tail---------------------^	  |
  *			--						--						  --							  --
- *	count = 0		count = 1			count = 2						count = 3
+ *	count = 0		count = 1			count = 2				count = 3
  *
  *
  */
@@ -250,13 +253,11 @@ void test_linkedListAddToHead_given_empty_linkedlist_count_is_0_expect_count_2_w
 /* testing whether LinkedList is update every time new item is added tail or not.
  *
  *	before		after add tail X1			after add tail X2
- *	head-----		head---> item1				head--->		item1		item2	
- *  	    |  			 	 next----- 			 	next-----> 	next--->	next---
- *	tail----|		tail------^		 |				tail---------------------^	  |
- *			--						--								    		 --
- *	count = 0		count = 1						count = 2
- *
- *
+ *	head-----		head---> item1				head-->	item1	item2	
+ *  	    |  			 	 next----- 			 		next--->next---
+ *	tail----|		tail------^		 |			tail-------------^	  |
+ *			--						--								 --
+ *	count = 0		count = 1					count = 2
  */
  //*
 void test_linkedListAddToTail_given_empty_linkedlist_count_is_0_expect_count_2_when_run_two_time(void){
@@ -293,7 +294,7 @@ void test_linkedListAddToTail_given_empty_linkedlist_count_is_0_expect_count_2_w
 /**
  * test from a empty Linked-List, add item 1 and item 2 into at head then add item3 at tail.
  *
- *	before					after add head					after add tail
+ *	after add item1 at head	after add item1 at head			after add item3 at tail
  *	head---> item 1			head---> item2		item1		head---> item2		item1	item3	
  *  		 next---- 			 	 next-----> next-----			 next-----> next--->next---
  *	tail-------^	|		tail------------------^		|	tail-------------------------^	  |
@@ -345,7 +346,7 @@ add_item_1_then_item_2_at_head_and_add_item_3_at_tail(void){
 }
 //*/
 /**
- *Strting from a Linked-List with item 2 then item 1 remove item 2.
+ *Starting from a Linked-List with item 2 then item 1 remove item 2.
  *
  *	before							after
  *	head---> item2		item 1		head---> item 1
@@ -375,7 +376,7 @@ void test_linkedListRemoveFrist_given_linked_list_with_item_2_and_item_1_expect_
 //*/
 
 /**
- *Strting from a Linked-List with item 2 then item 1 remove item 1.
+ *Starting from a Linked-List with item 2 then item 1 remove item 1.
  *
  *	before							after
  *	head---> item2		item 1		head---> item 2
@@ -425,7 +426,7 @@ void test_linkedListRemoveLast_given_item2_then_item1_count_2_expect_count_1(voi
 }//*/
 
 /**
- *Strting from a Linked-List with item 3 to item 1 remove item 1.
+ *Starting from a Linked-List with item 3 to item 1 remove item 1.
  *
  *	before									after
  *	head---> item3		item2 	item 1		head---> item 3		item2
@@ -472,7 +473,7 @@ void test_dataSearch_given_empty_list_expect_return_addrest_NULL(void){
 }
 //*/
 /**
- *Strting from a Linked-List with item 3 to item 1 find value2.
+ *Starting from a Linked-List with item 3 to item 1 find value2.
  *
  *	given:									return:
  *	head---> item3		item2 	item 1			address item2 
@@ -512,7 +513,7 @@ void test_dataSearch_given_data_int_2_expect_return_addrest_item(void){
 }
 //*/
 /**
- *Strting from a Linked-List with item C to item A find valueA.
+ *Starting from a Linked-List with item C to item A find valueA.
  *
  *	given:									return:
  *	head---> itemC		itemB 	item A			address itemA 
@@ -550,7 +551,7 @@ void test_dataSearch_given_data_char_c_expect_return_addrest_itemA(void){
 }
 //*/
 /**
- *Strting from a Linked-List with item C to item A find string1.
+ *Starting from a Linked-List with item C to item A find string1.
  *
  *	given:									return:
  *	head---> itemC		itemB 	item A			address itemA 
@@ -566,7 +567,6 @@ void test_dataSearch_given_data_string_abc_expect_return_addrest_itemA(void){
 	char *string1 = "abc";
 	char *string2 = "def";
 	char *string3 = "ghi";
-	char *stringtest = "zhi";
 	ListItem  itemDataC = {.next=NULL, .data=(void*)string3};
 	ListItem  itemDataB = {.next=NULL, .data=(void*)string2};
 	ListItem  itemDataA = {.next=NULL, .data=(void*)string1};
@@ -588,7 +588,55 @@ void test_dataSearch_given_data_string_abc_expect_return_addrest_itemA(void){
 	TEST_ASSERT_EQUAL(tempItem,list.head->next->next);
 }
 /**
- *Strting from a Linked-List with item C to item A find Dictionary1.
+ *Starting from a Linked-List with item C to item B find valueC.
+ *
+ *	given:									return:
+ *	head---> itemC		itemB 	item A			address itemB
+ * 			 string3	valueC	value3	
+ *  		 next-----> next---->next---|	main:
+ *    NULL<--perv <-----perv<----perv	|	  find valueC in which item
+ *	tail--------------------------^		|	
+ *										--		
+ *	count = 3					
+ */
+void test_dataSearch_given_data_char_d_expect_throw_error_1(void){
+	
+	char *string1 = "abc";
+	char *string2 = "zbc";
+	char value9 = 'd';
+	char valueC = 'c';
+	int value5 = 5;
+	int value3 = 3;
+	ListItem  itemDataC = {.next=NULL, .data=(void*)string1};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&valueC};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&value3};
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemC->itemB->itemA->NULL
+	listInit(&list);
+	linkedListAddToHead(&list, itemA);
+	linkedListAddToHead(&list, itemB);
+	linkedListAddToHead(&list, itemC);
+	///end initialise
+	
+	CEXCEPTION_T e;
+	Try {
+		TEST_ASSERT_EQUAL(value3,*(int*)(list.head->next->next->data));
+		TEST_ASSERT_EQUAL(string1,(char*)(list.head->data));
+		TEST_ASSERT_EQUAL(valueC,*(char*)(list.head->next->data));
+		ListItem *tempItem = dataSearch(&list, (void*)string2);//&value3
+		TEST_FAIL_MESSAGE("Expect DATA_NOT_FOUND. But no exception thrown.");
+	} Catch(e){
+		printf(e->errorMsg);
+		TEST_ASSERT_EQUAL(DATA_NOT_FOUND, e->errorCode);
+		freeError(e);
+    }
+}
+/**
+ *Starting from a Linked-List with item C to item A find Dictionary1.
  *
  *	given:											return:
  *	head---> itemC			itemB 		item A			address itemA 
@@ -600,7 +648,7 @@ void test_dataSearch_given_data_string_abc_expect_return_addrest_itemA(void){
  *	count = 3					
  */
  //*
-void test_dataSearch2_given_data_string_abc_expect_return_addrest_itemA(void){
+void test_dataSearch_given_data_string_amoeba_expect_return_addrest_itemA(void){
 	
 	char *name1 = "amoeba";
 	char *name2 = "bacterium";
@@ -633,7 +681,7 @@ void test_dataSearch2_given_data_string_abc_expect_return_addrest_itemA(void){
 	TEST_ASSERT_EQUAL(tempItem,list.head->next);
 }//*/
 /**
- *Strting from a Linked-List with item 3 to item 1 remove item2.
+ *Starting from a Linked-List with item 3 to item 1 remove item2.
  *
  *	before:									after:
  *	head---> item3		item2 	item 1		head---> item3		item1	
@@ -681,7 +729,7 @@ void test_linkedListSearchRemove_given_data_int_2_expect_count_2_item2_remove(vo
 }
 //*/
 /**
- *Strting from a Linked-List with item 4 to item 1 remove item3.
+ *Starting from a Linked-List with item 4 to item 1 remove item3.
  *
  *	before:										after:
  *	head---> item4	item3	item2 	item 1		head---> item4	item2	item1	
@@ -732,7 +780,7 @@ void test_linkedListSearchRemove_given_data_int_3_expect_count_3_item3_remove(vo
 }
 //*/
 /**
- *Strting from a Linked-List with item 4 to item 1 remove item4.
+ *Starting from a Linked-List with item 4 to item 1 remove item4.
  *
  *	before:										after:
  *	head---> item4	item3	item2 	item 1		head---> item3	item2	item1	
@@ -782,7 +830,7 @@ void test_linkedListSearchRemove_given_data_int_4_expect_count_3_item4_remove(vo
 	TEST_ASSERT_EQUAL(3, list.count);
 }//*/
 /**
- *Strting from a Linked-List with item 4 to item 1 remove item1.
+ *Starting from a Linked-List with item 4 to item 1 remove item1.
  *
  *	before:										after:
  *	head---> item4	item3	item2 	item 1		head---> item4	item3	item2	
@@ -831,3 +879,303 @@ void test_linkedListSearchRemove_given_data_int_1_expect_count_3_item1_remove(vo
 	TEST_ASSERT_EQUAL(NULL, list.head->pervious);
 	TEST_ASSERT_EQUAL(3, list.count);
 }//*/
+void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_expect_true(void){
+	char* dataName = "amoeba";
+	char *name1 = "amoeba";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	int result = 2;
+	result = getNameFormDictionaryAndCompare(&itemDataA, dataName);
+	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
+	TEST_ASSERT_TRUE(result);
+	
+}
+void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_trailing_space_expect_flase(void){
+	char* dataName = "amoeba ";
+	char *name1 = "amoeba";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	int result = 2;
+	result = getNameFormDictionaryAndCompare(&itemDataA,dataName);
+	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
+	TEST_ASSERT_FALSE(result);
+	
+}
+void test_getNameFormDictionaryAndCompare_given_dataName_amoebe_expect_flase(void){
+	char* dataName = "amoebe";
+	char *name1 = "amoeba";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	int result = 2;
+	result = getNameFormDictionaryAndCompare(&itemDataA, dataName);
+	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
+	TEST_ASSERT_FALSE(result);
+}
+void test_getNameFormDictionaryAndCompare_given_dataName_Amoeba_expect_flase(void){
+	char* dataName = "Amoeba";
+	char *name1 = "amoeba";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	int result = 2;
+	result = getNameFormDictionaryAndCompare(&itemDataA, dataName);
+	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
+	TEST_ASSERT_FALSE(result);
+}
+/**
+ *Starting from a Linked-List with item A to item C find Dictionary2.
+ *
+ *	given:											return:
+ *	head---> itemA		 itemB 		 itemC			address itemB 
+ * 			 Dictionary1 Dictionary2 Dictionary3	
+ *  		 next -----> next -----> next---|		main:
+ *    NULL<--perv <----- perv <----- perv   |	 	find Dictionary2->name2 
+ *	tail-----------------------------^	    |		in which item.
+ *											--		
+ *	count = 3					
+ */
+ //*
+void test_searchItemFromDictionary_given_data_string_amoeba_expect_return_addrest_itemA(void){
+	
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	
+	TEST_ASSERT_EQUAL(itemA, list.head);
+	TEST_ASSERT_EQUAL(itemC, list.tail);
+	TEST_ASSERT_EQUAL(itemB, list.head->next);
+	ListItem *tempItem = searchItemFromDictionary(&list, (void*)name2);
+	TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->data))->name);
+	TEST_ASSERT_EQUAL_STRING(defination2,((Dictionary*)(list.head->next->data))->defination);
+	TEST_ASSERT_EQUAL(tempItem,list.head->next);
+	TEST_ASSERT_EQUAL(3,list.count);
+}
+//*/
+void test_searchItemFromDictionary_given_data_string_amoebe_expect_throw_error_1(void){
+	
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *name4 = "amoebe";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	CEXCEPTION_T e;
+	Try {
+		TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->data))->name);
+		TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
+		TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->next->data))->name);
+		TEST_ASSERT_EQUAL(3,list.count);
+		ListItem *tempItem = searchItemFromDictionary(&list, (void*)name4);
+		TEST_FAIL_MESSAGE("Expect DATA_NOT_FOUND. But no exception thrown.");
+	} Catch(e){
+		printf(e->errorMsg);
+		TEST_ASSERT_EQUAL(DATA_NOT_FOUND, e->errorCode);
+		freeError(e);
+    }
+}
+/**
+ *Starting from a Linked-List with item A to item C remove itemB.
+ *
+ *	before:										after:									
+ *	head---> itemA		 itemB 		 itemC			head---> itemA		 itemC 		   
+ * 			 Dictionary1 Dictionary2 Dictionary3			 Dictionary1 Dictionary3 
+ *  		 next -----> next -----> next---|				 next -----> next ---|	
+ *    NULL<--perv <----- perv <----- perv   |	 	  NULL<--perv <----- perv 	 |
+ *	tail-----------------------------^	    |		tail------------------^	     |
+ *											--									--		
+ *	count = 3										count = 2
+ */
+ //*
+void test_SearchAndRemoveDictionary_given_data_string_bacterium_expect_remove_itemB_count_2(void){
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	TEST_ASSERT_EQUAL(itemA, list.head);
+	TEST_ASSERT_EQUAL(itemB, list.head->next);
+	TEST_ASSERT_EQUAL(itemC, list.head->next->next);
+	TEST_ASSERT_EQUAL(NULL, list.head->next->next->next);
+	TEST_ASSERT_EQUAL(itemC, list.tail);
+	TEST_ASSERT_EQUAL(3,list.count);
+	
+	SearchAndRemoveDictionary(&list,(void*)name2);
+	TEST_ASSERT_EQUAL(itemA, list.head);
+	TEST_ASSERT_EQUAL(itemC, list.head->next);
+	TEST_ASSERT_EQUAL(NULL, list.head->next->next);
+	TEST_ASSERT_EQUAL(itemC, list.tail);
+	TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
+	TEST_ASSERT_EQUAL(2,list.count);
+}
+/**
+ *Starting from a Linked-List with item A to item C remove itemB and itemC.
+ *
+ *	before:										after:									
+ *	head---> itemA		 itemB 		 itemC			head---> itemA				   
+ * 			 Dictionary1 Dictionary2 Dictionary3			 Dictionary1 
+ *  		 next -----> next -----> next---|				 next --------|	
+ *    NULL<--perv <----- perv <----- perv   |	 	  NULL<--perv 	   	  |
+ *	tail-----------------------------^	    |		tail-------^	      |
+ *											--							 --		
+ *	count = 3										count = 1
+ */
+ //*
+void test_SearchAndRemoveDictionary_given_bacterium_and_Carnotaurus_expect_remove_itemB_and_C_count_1(void){
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	TEST_ASSERT_EQUAL(itemA, list.head);
+	TEST_ASSERT_EQUAL(itemB, list.head->next);
+	TEST_ASSERT_EQUAL(itemC, list.head->next->next);
+	TEST_ASSERT_EQUAL(NULL, list.head->next->next->next);
+	TEST_ASSERT_EQUAL(itemC, list.tail);
+	TEST_ASSERT_EQUAL(3,list.count);
+	
+	SearchAndRemoveDictionary(&list,(void*)name2);//bacterium
+	SearchAndRemoveDictionary(&list,(void*)name3);//Carnotaurus
+	TEST_ASSERT_EQUAL(itemA, list.head);
+	TEST_ASSERT_EQUAL(NULL, list.head->next);
+	TEST_ASSERT_EQUAL(itemA, list.tail);
+	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
+	TEST_ASSERT_EQUAL(1,list.count);
+}
+/**
+ *Starting from a Linked-List with item A to item C remove all item.
+ *
+ *	before:										after:									
+ *	head---> itemA		 itemB 		 itemC			head-----|			   
+ * 			 Dictionary1 Dictionary2 Dictionary3			 |
+ *  		 next -----> next -----> next---|				 |	
+ *    NULL<--perv <----- perv <----- perv   |	 	  	   	 |
+ *	tail-----------------------------^	    |		tail-----|
+ *											--				--		
+ *	count = 3										count = 0
+ */
+ //*
+void test_SearchAndRemoveDictionary_given_amoeba_bacterium_and_Carnotaurus_expect_remove_itemB_A_and_C_count_0(void){
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	TEST_ASSERT_EQUAL(itemA, list.head);
+	TEST_ASSERT_EQUAL(itemB, list.head->next);
+	TEST_ASSERT_EQUAL(itemC, list.head->next->next);
+	TEST_ASSERT_EQUAL(NULL, list.head->next->next->next);
+	TEST_ASSERT_EQUAL(itemC, list.tail);
+	TEST_ASSERT_EQUAL(3,list.count);
+	
+	SearchAndRemoveDictionary(&list,(void*)name1);//amoeba
+	SearchAndRemoveDictionary(&list,(void*)name2);//bacterium
+	SearchAndRemoveDictionary(&list,(void*)name3);//Carnotaurus
+	TEST_ASSERT_EQUAL(NULL, list.head);
+	TEST_ASSERT_EQUAL(NULL, list.tail);
+	TEST_ASSERT_EQUAL(0,list.count);
+}
