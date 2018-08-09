@@ -34,8 +34,6 @@ void linkedListAddToHead(LinkedList* linkedList , ListItem* listItem){
 		linkedList -> count += 1;
 	}
 }
-
-
 /*
  * start a new structure that point to nothing.
  *	head-----		
@@ -201,7 +199,9 @@ ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData){
 int getNameFormDictionaryAndCompare(ListItem * item, char* inputData){
 	char * tempData = ((Dictionary*)(item->data))->name;	
 	//printf("is tempData=%s\n",tempData);
-	//printf("is inputData=%s\n",inputData);
+	char * strResult = extractWork(tempData);
+	
+	
 	int result = strcmp(tempData,inputData);
 	//printf("is result=%d\n",result);
 	if(result == 0){
@@ -236,4 +236,62 @@ void SearchAndRemoveDictionary(LinkedList * linkedList, void* inputData){
 		itemNext -> pervious = itemPerv;
 		linkedList->count -= 1;
 	}
+}
+
+char* find1stNonSpace(char * name){
+	char * namePtr = name;
+	int i = 0;
+	while((namePtr[i] == ' ') && (namePtr[i] != '\0')){
+		i++;
+	}
+	return namePtr = namePtr + i;
+}
+int getWordLength(char* name){
+	char * namePtr = find1stNonSpace(name);
+	int i = 0;
+	//printf("namePtr[]=%c\n",namePtr[1]);
+	while((namePtr[i] != ' ') && (namePtr[i] != '\0')){
+		i++;
+	}
+	return i;
+}
+char* createWordTolower(char* name , int length){
+	int i = 0;
+	char * work = (char *)malloc(length * sizeof(char));
+	while ((name[i] != ' ') && (name[i] != '\0')){
+		work[i] = (tolower(name[i]));
+		i++;
+	}
+	return work;
+}
+/* doing ignore front and behinf Spaces.
+ * function needed: 
+ * 1.) find1stNonSpace
+ * 2.) getWordLength
+ * 3.) createWord
+ */
+char* extractWork(char* name){
+	int len = 0;
+	char* ptr;
+	char* work;
+	ptr = find1stNonSpace(name);
+	len = getWordLength(ptr);
+	work = createWordTolower(ptr,len);
+	return work;
+}
+void freeDictionary(Dictionary *dictionary){
+  if(dictionary){
+    if (dictionary->name)
+      free(dictionary->name);
+    free(dictionary);
+  }
+}
+char* toLower(char * line){
+	char* strLower = (char *)malloc(strlen(line));
+	int i = 0;
+	while( line[i] != '\0') {
+		strLower[i] =(tolower(line[i]));
+		i++;
+	}
+	return strLower;
 }

@@ -679,6 +679,7 @@ void test_dataSearch_given_data_string_amoeba_expect_return_addrest_itemA(void){
 	TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->data))->name);
 	TEST_ASSERT_EQUAL_STRING(defination2,((Dictionary*)(list.head->next->data))->defination);
 	TEST_ASSERT_EQUAL(tempItem,list.head->next);
+	
 }//*/
 /**
  *Starting from a Linked-List with item 3 to item 1 remove item2.
@@ -1179,3 +1180,93 @@ void test_SearchAndRemoveDictionary_given_amoeba_bacterium_and_Carnotaurus_expec
 	TEST_ASSERT_EQUAL(NULL, list.tail);
 	TEST_ASSERT_EQUAL(0,list.count);
 }
+void test_SearchAndRemoveDictionary_given_amoeba_trailing_space_expect_throw_error_1_count_3(void){
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *name4 = "amoeba ";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	
+	TEST_ASSERT_EQUAL(itemA, list.head);
+	TEST_ASSERT_EQUAL(itemB, list.head->next);
+	TEST_ASSERT_EQUAL(itemC, list.head->next->next);
+	TEST_ASSERT_EQUAL(NULL, list.head->next->next->next);
+	TEST_ASSERT_EQUAL(itemC, list.tail);
+	TEST_ASSERT_EQUAL(3,list.count);
+	
+	CEXCEPTION_T e;
+	Try {
+		TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->data))->name);
+		TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
+		TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->next->data))->name);
+		TEST_ASSERT_EQUAL(3,list.count);
+		SearchAndRemoveDictionary(&list,(void*)name4);//"amoeba "
+		TEST_FAIL_MESSAGE("Expect DATA_NOT_FOUND. But no exception thrown.");
+	} Catch(e){
+		printf(e->errorMsg);
+		TEST_ASSERT_EQUAL(DATA_NOT_FOUND, e->errorCode);
+		freeError(e);
+    }
+}
+
+//*
+void test_find1stNonSpace_given_5space_amoeba_2tailling_space_expect_return_amoeba_2tailling(void){
+	char *name1 = "     amoeba  ";
+	char *wordPtr = find1stNonSpace(name1);
+	TEST_ASSERT_EQUAL_STRING("amoeba  ",wordPtr);
+}
+void test_find1stNonSpace_given_nonSpace_amoeba_2tailling_space_expect_return_amoeba_2tailling(void){
+	char *name1 = "amoeba  ";
+	char *wordPtr = find1stNonSpace(name1);
+	TEST_ASSERT_EQUAL_STRING("amoeba  ",wordPtr);
+}
+void test_getWordLength_given_amoeba_2tailling_space_expect_return_worklength_6(void){
+	char *name1 = "amoeba  ";
+	int workLength = getWordLength(name1);
+	TEST_ASSERT_EQUAL(6,workLength);
+}
+void test_getWordLength_given_amoeba_nonTailling_space_expect_return_worklength_6(void){
+	char *name1 = "amoeba";
+	int workLength = getWordLength(name1);
+	TEST_ASSERT_EQUAL(6,workLength);
+}
+void test_createWord_given_5space_Amoeba_2tailling_space_expect_return_amoeba(void){
+	char *name1 = "    Amoeba  ";
+	int workLength = getWordLength(name1);
+	char* wordPtr = find1stNonSpace(name1);
+	char* work = createWordTolower(wordPtr,workLength);
+	TEST_ASSERT_EQUAL_STRING("amoeba",work);
+}
+void test_extractWork_given_5space_amoeba_2tailling_space_expect_return_amoeba(void){
+	char *name1 = "    amoeba  ";
+	char* work = extractWork(name1);
+	TEST_ASSERT_EQUAL_STRING("amoeba",work);
+	free(work);//
+}
+void test_toLower_given_HeLLO_expect_return_hello(void){
+	char *name1 = "HeLLO";
+	char* resultStr = toLower(name1);
+	TEST_ASSERT_EQUAL_STRING("hello",resultStr);
+	free(resultStr);
+}
+//*/

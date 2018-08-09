@@ -6,6 +6,7 @@
 #include	<stdlib.h>
 #include	<string.h>
 #include	<math.h>
+#include 	<ctype.h>
 #include 	<Exception.h>
 #include 	"Exception.h"
 #include 	"CException.h"
@@ -43,4 +44,10 @@ int getNameFormDictionaryAndCompare(ListItem * item, char* inputData);
 ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData);
 void SearchAndRemoveDictionary(LinkedList * linkedList, void* inputData);
 
+char* find1stNonSpace(char * name);
+int getWordLength(char* name);
+char* createWordTolower(char* name , int length);
+char* extractWork(char* name);
+void freeDictionary(Dictionary *dictionary);
+char* toLower(char * line);
 #endif // _DICTIONARY_H
