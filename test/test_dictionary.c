@@ -1227,7 +1227,7 @@ void test_SearchAndRemoveDictionary_given_amoeba_trailing_space_expect_throw_err
 		TEST_ASSERT_EQUAL(DATA_NOT_FOUND, e->errorCode);
 		freeError(e);
     }
-	freeDictionary(itemC);
+	//freeDictionary();
 }
 
 //*
