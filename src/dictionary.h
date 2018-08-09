@@ -48,6 +48,6 @@ char* find1stNonSpace(char * name);
 int getWordLength(char* name);
 char* createWordTolower(char* name , int length);
 char* extractWork(char* name);
-void freeDictionary(Dictionary *dictionary);
+void freeDictionary(void *item);
 char* toLower(char * line);
 #endif // _DICTIONARY_H

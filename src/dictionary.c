@@ -279,17 +279,15 @@ char* extractWork(char* name){
 	work = createWordTolower(ptr,len);
 	return work;
 }
-void freeDictionary(Dictionary *dictionary){
-  if(dictionary){
-    if (dictionary->name)
-      free(dictionary->name);
-    free(dictionary);
+void freeDictionary(void *item){
+  if(item){
+    free(item);
   }
 }
 char* toLower(char * line){
 	char* strLower = (char *)malloc(strlen(line));
 	int i = 0;
-	while( line[i] != '\0') {
+	while( line[i] != '\0'){
 		strLower[i] =(tolower(line[i]));
 		i++;
 	}
