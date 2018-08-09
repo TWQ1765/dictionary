@@ -893,7 +893,7 @@ void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_expect_true(void
 	TEST_ASSERT_TRUE(result);
 	
 }
-void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_trailing_space_expect_flase(void){
+void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_trailing_space_expect_true(void){
 	char* dataName = "amoeba ";
 	char *name1 = "amoeba";
 	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
@@ -903,7 +903,7 @@ void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_trailing_space_e
 	int result = 2;
 	result = getNameFormDictionaryAndCompare(&itemDataA,dataName);
 	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
-	TEST_ASSERT_FALSE(result);
+	TEST_ASSERT_TRUE(result);
 	
 }
 void test_getNameFormDictionaryAndCompare_given_dataName_amoebe_expect_flase(void){
@@ -918,7 +918,7 @@ void test_getNameFormDictionaryAndCompare_given_dataName_amoebe_expect_flase(voi
 	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
 	TEST_ASSERT_FALSE(result);
 }
-void test_getNameFormDictionaryAndCompare_given_dataName_Amoeba_expect_flase(void){
+void test_getNameFormDictionaryAndCompare_given_dataName_Amoeba_expect_TRUE(void){
 	char* dataName = "Amoeba";
 	char *name1 = "amoeba";
 	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
@@ -928,7 +928,7 @@ void test_getNameFormDictionaryAndCompare_given_dataName_Amoeba_expect_flase(voi
 	int result = 2;
 	result = getNameFormDictionaryAndCompare(&itemDataA, dataName);
 	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
-	TEST_ASSERT_FALSE(result);
+	TEST_ASSERT_TRUE(result);
 }
 /**
  *Starting from a Linked-List with item A to item C find Dictionary2.
@@ -1128,6 +1128,7 @@ void test_SearchAndRemoveDictionary_given_bacterium_and_Carnotaurus_expect_remov
 	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
 	TEST_ASSERT_EQUAL(1,list.count);
 }
+//*/
 /**
  *Starting from a Linked-List with item A to item C remove all item.
  *
@@ -1180,11 +1181,13 @@ void test_SearchAndRemoveDictionary_given_amoeba_bacterium_and_Carnotaurus_expec
 	TEST_ASSERT_EQUAL(NULL, list.tail);
 	TEST_ASSERT_EQUAL(0,list.count);
 }
+
+//*/
 void test_SearchAndRemoveDictionary_given_amoeba_trailing_space_expect_throw_error_1_count_3(void){
 	char *name1 = "amoeba";
 	char *name2 = "bacterium";
 	char *name3 = "Carnotaurus";
-	char *name4 = "amoeba ";
+	char *name4 = "Amoebali ";
 	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
 	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
 	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
@@ -1226,8 +1229,8 @@ void test_SearchAndRemoveDictionary_given_amoeba_trailing_space_expect_throw_err
 		printf(e->errorMsg);
 		TEST_ASSERT_EQUAL(DATA_NOT_FOUND, e->errorCode);
 		freeError(e);
+		//freeDictionary(list.head);
     }
-	//freeDictionary();
 }
 
 //*
@@ -1260,14 +1263,48 @@ void test_createWord_given_5space_Amoeba_2tailling_space_expect_return_amoeba(vo
 }
 void test_extractWork_given_5space_amoeba_2tailling_space_expect_return_amoeba(void){
 	char *name1 = "    amoeba  ";
+	char *realName = "amoeba";
 	char* work = extractWork(name1);
-	TEST_ASSERT_EQUAL_STRING("amoeba",work);
-	free(work);//
+	int result = strcmp(realName,work);
+	TEST_ASSERT_EQUAL(0,result);
+	TEST_ASSERT_EQUAL_STRING(realName,work);
+	//free(work);//
 }
 void test_toLower_given_HeLLO_expect_return_hello(void){
 	char *name1 = "HeLLO";
 	char* resultStr = toLower(name1);
 	TEST_ASSERT_EQUAL_STRING("hello",resultStr);
-	free(resultStr);//
+	//free(resultStr);//
 }
+void test_stringCompare_given_amoeba_expect_return_TRUE(void){
+	char* dataName = "amoeba";
+	char *name1 = "amoeba";
+	int result = 2;
+	result = stringCompare(dataName, name1);
+	TEST_ASSERT_TRUE(result);
+}
+void test_stringCompare_given_string_diffrent_length_expect_return_FALSE(void){
+	char* dataName = "amoeba  ";
+	char *name1 = "amoeba";
+	int result = 2;
+	result = stringCompare(dataName, name1);
+	TEST_ASSERT_FALSE(result);
+}
+void test_stringCompare_given_empty_string_expect_return_true(void){
+	char* dataName = " ";
+	char *name1 = " ";
+	int result = 2;
+	result = stringCompare(dataName, name1);
+	TEST_ASSERT_TRUE(result);
+}
+void test_stringCompare_given_amoebe_expect_return_FALSE(void){
+	char* dataName = "amoebe";
+	char *name1 = "amoeba";
+	int result = 2;
+	result = stringCompare(dataName, name1);
+	TEST_ASSERT_FALSE(result);
+}
+
+//test
+
 //*/

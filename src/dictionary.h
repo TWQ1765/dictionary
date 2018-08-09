@@ -31,7 +31,11 @@ struct Dictionary{
    char *defination;
 };
  
-
+typedef struct StrCompare StrCompare;
+struct StrCompare{
+   int trueFalse;
+   int sensitivity;
+};
 
 void linkedListAddToHead(LinkedList * linkList , ListItem* listItem);
 void listInit(LinkedList * list);
@@ -48,6 +52,10 @@ char* find1stNonSpace(char * name);
 int getWordLength(char* name);
 char* createWordTolower(char* name , int length);
 char* extractWork(char* name);
-void freeDictionary(void *item);
-char* toLower(char * line);
+void freeDictionary(ListItem *item);//void*
+char*toLower(char * line);
+int stringCompare(char* testStr,char *inputStr);
+
+//test
+
 #endif // _DICTIONARY_H

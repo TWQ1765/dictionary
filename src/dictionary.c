@@ -176,8 +176,6 @@ ListItem* dataSearch(LinkedList * linkedList, void* inputData){
  */
 ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData){
 	char * error = inputData;
-	//printf("linkedList=%s\n",((Dictionary*)(linkedList->head->data))->name);//try struct or int,char type.
-	//printf("linkedList=%d\n",(char*)(linkedList->head->data));//try struct or int,char type
 	LinkedList * tempList = linkedList;
 	if (linkedList->head == NULL){
 		return NULL;
@@ -197,18 +195,17 @@ ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData){
 // true  = 1 , compare result same string.
 // flase = 0 , compare result not same string.
 int getNameFormDictionaryAndCompare(ListItem * item, char* inputData){
-	char * tempData = ((Dictionary*)(item->data))->name;	
+	char * tempData1 = ((Dictionary*)(item->data))->name;
+	
 	//printf("is tempData=%s\n",tempData);
-	char * strResult = extractWork(tempData);
-	
-	
-	int result = strcmp(tempData,inputData);
-	//printf("is result=%d\n",result);
-	if(result == 0){
-		return 1;
-	}else{
-		return 0;
-	}
+	char * tempData2 = extractWork(tempData1);
+	char * tempDataResult = toLower(tempData2);
+	char * inputData1 = extractWork(inputData);
+	char * inputDataResult = toLower(inputData1);
+	//printf("is tempDataResult=%s\n",tempDataResult);
+	//printf("is inputDataResult=%s\n",inputDataResult);
+	int result = stringCompare(tempDataResult,inputDataResult);
+	return result;
 }
 /* how to differentiate void* data point to struct or int,char type?
  * no way to do that. so this fuction is only for void* data point to struct.
@@ -249,7 +246,6 @@ char* find1stNonSpace(char * name){
 int getWordLength(char* name){
 	char * namePtr = find1stNonSpace(name);
 	int i = 0;
-	//printf("namePtr[]=%c\n",namePtr[1]);
 	while((namePtr[i] != ' ') && (namePtr[i] != '\0')){
 		i++;
 	}
@@ -257,11 +253,12 @@ int getWordLength(char* name){
 }
 char* createWordTolower(char* name , int length){
 	int i = 0;
-	char * work = (char *)malloc(length * sizeof(char));
+	char * work = (char *)malloc(length+1);
 	while ((name[i] != ' ') && (name[i] != '\0')){
 		work[i] = (tolower(name[i]));
 		i++;
 	}
+	work[i]='\0';
 	return work;
 }
 /* doing ignore front and behinf Spaces.
@@ -279,17 +276,38 @@ char* extractWork(char* name){
 	work = createWordTolower(ptr,len);
 	return work;
 }
-void freeDictionary(void *item){
+void freeDictionary(ListItem *item){
   if(item){
     free(item);
   }
 }
 char* toLower(char * line){
-	char* strLower = (char *)malloc(strlen(line));
+	char *strLower = (char *)malloc(strlen(line+1));
 	int i = 0;
 	while( line[i] != '\0'){
 		strLower[i] =(tolower(line[i]));
 		i++;
 	}
+	strLower[i]='\0';
 	return strLower;
 }
+
+
+int stringCompare(char* testStr,char *inputStr){
+	int i=0;
+	int testStrLen = strlen(testStr);
+	int inputStrLen = strlen(inputStr);
+	if (testStrLen!=inputStrLen){
+		return 0;
+	}else{
+		while( (testStr[i]!='\0') && (inputStr[i]!='\0')){
+			if((testStr[i]) != (inputStr[i])){
+				return 0;
+			}else{
+				i++;
+			}
+		}
+		return 1;
+	}
+}
+//test
