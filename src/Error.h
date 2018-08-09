@@ -4,6 +4,7 @@
 typedef enum {
 	NO_ERROR,
 	DATA_NOT_FOUND,
+	DATA_ALREEADY_EXIST,
 }ErrorCode;
 
 

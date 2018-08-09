@@ -192,12 +192,15 @@ ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData){
 		}
 	}
 }
-// true  = 1 , compare result same string.
-// flase = 0 , compare result not same string.
+/* true  = 1 , compare result same string.
+ * flase = 0 , compare result not same string.
+ * function needed:
+ * 1.) extractWork
+ * 2.) toLower
+ * 3.) stringCompare
+ */
 int getNameFormDictionaryAndCompare(ListItem * item, char* inputData){
-	char * tempData1 = ((Dictionary*)(item->data))->name;
-	
-	//printf("is tempData=%s\n",tempData);
+	char * tempData1 = ((Dictionary*)(item->data))->name;//get data from item
 	char * tempData2 = extractWork(tempData1);
 	char * tempDataResult = toLower(tempData2);
 	char * inputData1 = extractWork(inputData);
@@ -292,9 +295,10 @@ char* toLower(char * line){
 	return strLower;
 }
 
-
+//can be improve by adding sensitivity
 int stringCompare(char* testStr,char *inputStr){
 	int i=0;
+	int sensitivity = 0;
 	int testStrLen = strlen(testStr);
 	int inputStrLen = strlen(inputStr);
 	if (testStrLen!=inputStrLen){
@@ -302,12 +306,43 @@ int stringCompare(char* testStr,char *inputStr){
 	}else{
 		while( (testStr[i]!='\0') && (inputStr[i]!='\0')){
 			if((testStr[i]) != (inputStr[i])){
+				
 				return 0;
 			}else{
+				sensitivity++;
 				i++;
 			}
 		}
 		return 1;
 	}
 }
+// true or return 1 means not same work in the Dictionary
+int SearchAvoidSameWork(LinkedList * linkedList, char* name){
+	char * error = name;
+	LinkedList * tempList = linkedList;
+	if (linkedList->head == NULL){
+		return 1;
+	}else{
+		ListItem *tempItem = tempList->head;
+		while((getNameFormDictionaryAndCompare(tempItem,name)!=0)  && (tempItem!=(tempList->tail))){
+			//check until tail
+			tempItem = tempItem->next;
+		}
+		if(getNameFormDictionaryAndCompare(tempItem,name)!=0){//check tail
+			throwError(2,"ERROR %d: '%s' is already in the Dictionary.",2,(error));
+		}else{
+			return 1;
+		}
+	}
+}
+/* adding item into linkedList
+ * addMode = {ADD_HEAD || ADD_TAIL}
+ * ADD_HEAD = 0
+ * ADD_HEAD = 1
+ * function needed: 
+ * 1.) SearchAvoidSameWork
+ * 2.) linkedListAddToHead
+ * 3.) linkedListAddToTail
+ */
+void addItemToDictionary(LinkedList * linkedList, ListItem* listItem,int addMode);
 //test

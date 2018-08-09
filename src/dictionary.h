@@ -35,6 +35,7 @@ typedef struct StrCompare StrCompare;
 struct StrCompare{
    int trueFalse;
    int sensitivity;
+   char * nearIdaeData;
 };
 
 void linkedListAddToHead(LinkedList * linkList , ListItem* listItem);
