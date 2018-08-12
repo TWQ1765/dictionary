@@ -1021,6 +1021,20 @@ void test_searchItemFromDictionary_given_data_string_amoebe_expect_throw_error_1
 		freeError(e);
     }
 }
+void test_searchItemFromDictionary_given_empty_list_and_amoebe_expect_throw_error_1(void){
+	char *name1 = "amoebe";
+	LinkedList list;
+	listInit(&list);//initialise empty linklist
+	CEXCEPTION_T e;
+	Try {
+		ListItem *tempItem = searchItemFromDictionary(&list, (void*)name1);
+		TEST_FAIL_MESSAGE("Expect DATA_NOT_FOUND. But no exception thrown.");
+	} Catch(e){
+		printf(e->errorMsg);
+		TEST_ASSERT_EQUAL(DATA_NOT_FOUND, e->errorCode);
+		freeError(e);
+    }
+}
 /**
  *Starting from a Linked-List with item A to item C remove itemB.
  *

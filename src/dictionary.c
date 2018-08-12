@@ -175,7 +175,7 @@ ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData){
 	char * error = inputData;
 	LinkedList * tempList = linkedList;
 	if (linkedList->head == NULL){
-		return NULL;
+		throwError(1,"ERROR %d: '%s' is not found in the Dictionary.",1,(error));
 	}else{
 		ListItem *tempItem = tempList->head;
 		while((getNameFormDictionaryAndCompare(tempItem,inputData)!=1)  && (tempItem!=(tempList->tail))){
