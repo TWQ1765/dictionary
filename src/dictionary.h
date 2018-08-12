@@ -56,7 +56,6 @@ char* find1stNonSpace(char * name);
 int getWordLength(char* name);
 char* createWordTolower(char* name , int length);
 char* extractWork(char* name);
-//void freeDictionary(ListItem *item);//void*
 void freeDictionary(LinkedList *list);//void*
 char*toLower(char * line);
 int stringCompare(char* testStr,char *inputStr);
