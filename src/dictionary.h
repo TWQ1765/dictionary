@@ -11,6 +11,9 @@
 #include 	"Exception.h"
 #include 	"CException.h"
 
+#define ADD_HEAD 0
+#define ADD_TAIL 1
+
 typedef struct ListItem ListItem;
 struct ListItem{
 	ListItem *next;
@@ -37,26 +40,29 @@ struct StrCompare{
    int sensitivity;
    char * nearIdaeData;
 };
-
+//function linkedList
 void linkedListAddToHead(LinkedList * linkList , ListItem* listItem);
 void listInit(LinkedList * list);
 void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem);
 void linkedListRemoveFrist(LinkedList * linkedList);
 void linkedListRemoveLast(LinkedList * linkedList);
 ListItem* dataSearch(LinkedList * linkedList, void * inputData);
+//funtion Dictionary
 void linkedListSearchRemove(LinkedList * linkedList, void * inputData);
 int getNameFormDictionaryAndCompare(ListItem * item, char* inputData);
 ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData);
 void SearchAndRemoveDictionary(LinkedList * linkedList, void* inputData);
-
 char* find1stNonSpace(char * name);
 int getWordLength(char* name);
 char* createWordTolower(char* name , int length);
 char* extractWork(char* name);
-void freeDictionary(ListItem *item);//void*
+//void freeDictionary(ListItem *item);//void*
+void freeDictionary(LinkedList *list);//void*
 char*toLower(char * line);
 int stringCompare(char* testStr,char *inputStr);
-
-//test
+int SearchAvoidSameWork(LinkedList * linkedList, char* name);
+void SearchAndAddDictionary(LinkedList* linkedList, ListItem* listItem, int addMode);
+char* getDefination(LinkedList* linkedList, char* name);
+//just test
 
 #endif // _DICTIONARY_H

@@ -1268,7 +1268,6 @@ void test_extractWork_given_5space_amoeba_2tailling_space_expect_return_amoeba(v
 	int result = strcmp(realName,work);
 	TEST_ASSERT_EQUAL(0,result);
 	TEST_ASSERT_EQUAL_STRING(realName,work);
-	//free(work);//
 }
 void test_toLower_given_HeLLO_expect_return_hello(void){
 	char *name1 = "HeLLO";
@@ -1305,6 +1304,291 @@ void test_stringCompare_given_amoebe_expect_return_FALSE(void){
 	TEST_ASSERT_FALSE(result);
 }
 
-//test
 
-//*/
+void test_SearchAvoidSameWork_given_amoeba_expect_throw_error_2_DATA_ALREEADY_EXIST(void){
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	CEXCEPTION_T e;
+	Try {
+		TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->data))->name);
+		TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
+		TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->next->data))->name);
+		TEST_ASSERT_EQUAL(3,list.count);
+		int result = SearchAvoidSameWork(&list,(void*)name1);//"amoeba "
+		TEST_FAIL_MESSAGE("Expect DATA_ALREEADY_EXIST. But no exception thrown.");
+	} Catch(e){
+		printf(e->errorMsg);
+		TEST_ASSERT_EQUAL(DATA_ALREEADY_EXIST, e->errorCode);
+		freeError(e);
+		//freeDictionary(list.head);
+    }
+}
+void test_SearchAvoidSameWork_given_amoebe_expect_return_1(void){
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *name4 = "amoebe";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	
+	TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->next->data))->name);
+	TEST_ASSERT_EQUAL(3,list.count);
+	int result = SearchAvoidSameWork(&list,(void*)name4);//"amoebe "
+	TEST_ASSERT_TRUE(result);
+}
+void test_SearchAvoidSameWork_given_empty_linklist_and_amoeba_expect_return_1(void){
+	char *name1 = "amoeba";
+	LinkedList list;
+	
+	listInit(&list);//initialise empty linklist
+	TEST_ASSERT_EQUAL(0,list.count);
+	TEST_ASSERT_EQUAL(NULL, list.head);
+	TEST_ASSERT_EQUAL(NULL, list.tail);
+	int result = SearchAvoidSameWork(&list,(void*)name1);//"amoeba "
+	TEST_ASSERT_TRUE(result);
+}
+/* starting with empty LinkedList add head then tail.
+ *
+ *	before		after add head			after tail 
+ *	head-----		head---> itemB				head-->	itemB	itemA	
+ *  	    |  			 	 next----- 			 		next--->next---
+ *	tail----|		tail------^		 |			tail-------------^	  |
+ *			--						--								 --
+ *	count = 0		count = 1					count = 2
+ */
+void test_SearchAndAddDictionary_given_empty_linklist_expect_count2(void){
+	char *name1 = "tail";
+	char *name2 = "head";
+	char *defination1 = "a part of an animal's body, sticking out from the base of the back";
+	char *defination2 = "the upper or anterior division of the animal body that contains the brain";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	listInit(&list);//initialise empty linklist
+	
+	SearchAndAddDictionary(&list, itemB, ADD_HEAD);
+	TEST_ASSERT_EQUAL(1,list.count);
+	TEST_ASSERT_EQUAL(itemB, list.head);
+	TEST_ASSERT_EQUAL(itemB, list.tail);
+	
+	SearchAndAddDictionary(&list, itemA, ADD_TAIL);
+	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->next->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.tail->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->data))->name);
+	TEST_ASSERT_EQUAL(NULL,list.head->next->next);
+	TEST_ASSERT_EQUAL(itemB, list.head);
+	TEST_ASSERT_EQUAL(itemA, list.tail);
+	TEST_ASSERT_EQUAL(2,list.count);
+}
+/* starting with empty LinkedList add head x2.
+ *
+ *	before		after add head			try add itemA to head:
+ *	head-----		head---> itemA			add item already in linklist,	
+ *  	    |  			 	 next----- 		should throw an error 2,
+ *	tail----|		tail------^		 |		error 2 = DATA_ALREEADY_EXIST.	
+ *			--						--			
+ *	count = 0		count = 1					
+ */
+void test_SearchAndAddDictionary_given_same_item_add_head_expect_throw_error_2(void){
+	char *name1 = "tail";
+	char *name2 = "head";
+	char *defination1 = "a part of an animal's body, sticking out from the base of the back";
+	char *defination2 = "the upper or anterior division of the animal body that contains the brain";
+	
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	listInit(&list);//initialise empty linklist
+	
+	SearchAndAddDictionary(&list, itemA, ADD_HEAD);
+	TEST_ASSERT_EQUAL(1,list.count);
+	TEST_ASSERT_EQUAL(itemA, list.head);
+	TEST_ASSERT_EQUAL(itemA, list.tail);
+	CEXCEPTION_T e;
+	Try {
+		SearchAndAddDictionary(&list, itemA, ADD_HEAD);
+		TEST_FAIL_MESSAGE("Expect DATA_ALREEADY_EXIST. But no exception thrown.");
+	} Catch(e){
+		printf(e->errorMsg);
+		TEST_ASSERT_EQUAL(DATA_ALREEADY_EXIST, e->errorCode);
+		freeError(e);
+    }
+}
+/* starting with empty LinkedList add head then tail.
+ *
+ *	before		after add head			try add itemB to tail:
+ *	head-----		head---> itemB			add item already in linklist,	
+ *  	    |  			 	 next----- 		should throw an error 2,
+ *	tail----|		tail------^		 |		error 2 = DATA_ALREEADY_EXIST.	
+ *			--						--			
+ *	count = 0		count = 1					
+ */
+void test_SearchAndAddDictionary_given_same_item_add_tail_expect_throw_error_2(void){
+	char *name1 = "tail";
+	char *name2 = "head";
+	char *defination1 = "a part of an animal's body, sticking out from the base of the back";
+	char *defination2 = "the upper or anterior division of the animal body that contains the brain";
+	
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	listInit(&list);//initialise empty linklist
+	
+	SearchAndAddDictionary(&list, itemB, ADD_HEAD);
+	TEST_ASSERT_EQUAL(1,list.count);
+	TEST_ASSERT_EQUAL(itemB, list.head);
+	TEST_ASSERT_EQUAL(itemB, list.tail);
+	CEXCEPTION_T e;
+	Try {
+		SearchAndAddDictionary(&list, itemB, ADD_TAIL);
+		TEST_FAIL_MESSAGE("Expect DATA_ALREEADY_EXIST. But no exception thrown.");
+	} Catch(e){
+		printf(e->errorMsg);
+		TEST_ASSERT_EQUAL(DATA_ALREEADY_EXIST, e->errorCode);
+		freeError(e);
+    }
+}
+
+void test_getDefination_given_names_expect_return_definations(void){
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	
+	TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->next->data))->name);
+	TEST_ASSERT_EQUAL(3,list.count);
+	
+	char* result1 = getDefination(&list,name1);//"amoeba"
+	TEST_ASSERT_EQUAL_STRING(defination1,result1);
+	
+	char* result2 = getDefination(&list,name2);//"bacterium"
+	TEST_ASSERT_EQUAL_STRING(defination2,result2);
+	
+	char* result3 = getDefination(&list,name3);//"Carnotaurus"
+	TEST_ASSERT_EQUAL_STRING(defination3,result3);
+}
+
+void test_getDefination_given_name_nonExist_expect_throw_error1(void){
+	char *name1 = "amoeba";
+	char *name2 = "bacterium";
+	char *name3 = "Carnotaurus";
+	char *name4 = "hello";
+	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
+	char *defination2 = "A bacterium(plural bacteria) is a primitive, single-celled organism.";
+	char *defination3 = "Carnotaurus was a meat-eating dinosaur with horns on its head.";
+	Dictionary dictionary1 = {.name = name1 ,.defination = defination1};
+	Dictionary dictionary2 = {.name = name2 ,.defination = defination2};
+	Dictionary dictionary3 = {.name = name3 ,.defination = defination3};
+	ListItem  itemDataC = {.next=NULL, .data=(void*)&dictionary3};
+	ListItem  itemDataB = {.next=NULL, .data=(void*)&dictionary2};
+	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
+	
+	ListItem * itemC = &itemDataC;
+	ListItem * itemB = &itemDataB;
+	ListItem * itemA = &itemDataA;
+	LinkedList list;
+	
+	///initialise linklist: itemA->itemB->itemC->NULL
+	listInit(&list);
+	linkedListAddToTail(&list, itemA);
+	linkedListAddToTail(&list, itemB);
+	linkedListAddToTail(&list, itemC);
+	///end initialise
+	
+	TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
+	TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->next->data))->name);
+	TEST_ASSERT_EQUAL(3,list.count);
+	
+	CEXCEPTION_T e;
+	Try {
+		char* result = getDefination(&list,name4);//"hello"
+		TEST_FAIL_MESSAGE("Expect DATA_NOT_FOUND. But no exception thrown.");
+	} Catch(e){
+		printf(e->errorMsg);
+		TEST_ASSERT_EQUAL(DATA_NOT_FOUND, e->errorCode);
+		freeError(e);
+    }
+}

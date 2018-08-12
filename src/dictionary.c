@@ -1,9 +1,5 @@
 #include "dictionary.h"
 
-int addToDictionary(LinkedList* linkedList, char nameDic, char definitionDic){
-	//Dictionary itemDictionary ={.name = nameDic, .definition = definitionDic};
-	
-}
 /*
  *  If(count == 0)				If(count != 0)
  *	linkedList					linkedList
@@ -171,6 +167,7 @@ ListItem* dataSearch(LinkedList * linkedList, void* inputData){
 	}
 }
 /* data search for linkedList which void* data point to structure type
+ * return the item address.
  * function needed:
  * 1.) getNameFormDictionaryAndCompare;
  */
@@ -279,11 +276,7 @@ char* extractWork(char* name){
 	work = createWordTolower(ptr,len);
 	return work;
 }
-void freeDictionary(ListItem *item){
-  if(item){
-    free(item);
-  }
-}
+
 char* toLower(char * line){
 	char *strLower = (char *)malloc(strlen(line+1));
 	int i = 0;
@@ -306,7 +299,6 @@ int stringCompare(char* testStr,char *inputStr){
 	}else{
 		while( (testStr[i]!='\0') && (inputStr[i]!='\0')){
 			if((testStr[i]) != (inputStr[i])){
-				
 				return 0;
 			}else{
 				sensitivity++;
@@ -316,7 +308,15 @@ int stringCompare(char* testStr,char *inputStr){
 		return 1;
 	}
 }
-// true or return 1 means not same work in the Dictionary
+
+/*
+ * function SearchAvoidSameWork:
+ * test and find the work(name) form dictionary already exist or not.
+ * to prevent adding same work more time to dictionary
+ * true or return 1 means not same work in the Dictionary
+ * function needed: 
+ * 1.) getNameFormDictionaryAndCompare
+ */
 int SearchAvoidSameWork(LinkedList * linkedList, char* name){
 	char * error = name;
 	LinkedList * tempList = linkedList;
@@ -324,25 +324,49 @@ int SearchAvoidSameWork(LinkedList * linkedList, char* name){
 		return 1;
 	}else{
 		ListItem *tempItem = tempList->head;
-		while((getNameFormDictionaryAndCompare(tempItem,name)!=0)  && (tempItem!=(tempList->tail))){
+		while((getNameFormDictionaryAndCompare(tempItem,name)==0)  && (tempItem!=(tempList->tail))){
 			//check until tail
 			tempItem = tempItem->next;
 		}
-		if(getNameFormDictionaryAndCompare(tempItem,name)!=0){//check tail
-			throwError(2,"ERROR %d: '%s' is already in the Dictionary.",2,(error));
+		if(getNameFormDictionaryAndCompare(tempItem,name)==0){//check tail
+			return 1;//cant find work from dictionary.
 		}else{
-			return 1;
+			throwError(2,"ERROR %d: '%s' is already in the Dictionary.",2,(error));
 		}
 	}
+}
+void freeDictionary(LinkedList *list){
+  //if(list.head->){
+   // free(item);
+  //}
 }
 /* adding item into linkedList
  * addMode = {ADD_HEAD || ADD_TAIL}
  * ADD_HEAD = 0
- * ADD_HEAD = 1
+ * ADD_TAIL = 1
  * function needed: 
  * 1.) SearchAvoidSameWork
  * 2.) linkedListAddToHead
  * 3.) linkedListAddToTail
  */
-void addItemToDictionary(LinkedList * linkedList, ListItem* listItem,int addMode);
+void SearchAndAddDictionary(LinkedList* linkedList, ListItem* listItem, int addMode){
+	int result = 0;
+	if(addMode == ADD_HEAD){
+		result = SearchAvoidSameWork(linkedList,((Dictionary*)(listItem->data))->name);
+		linkedListAddToHead(linkedList, listItem);
+	}
+	else{
+		result = SearchAvoidSameWork(linkedList,((Dictionary*)(listItem->data))->name);
+		linkedListAddToTail(linkedList, listItem);
+	}
+}
+/*
+ * input name return defination.
+ * function needed:
+ * 1.)searchItemFromDictionary
+ */
+char* getDefination(LinkedList* linkedList, char* name){
+	ListItem *tempItem = searchItemFromDictionary(linkedList,name);
+	char* defination = ((Dictionary*)(tempItem->data))->defination;
+}
 //test
