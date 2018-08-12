@@ -178,11 +178,11 @@ ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData){
 		throwError(1,"ERROR %d: '%s' is not found in the Dictionary.",1,(error));
 	}else{
 		ListItem *tempItem = tempList->head;
-		while((getNameFormDictionaryAndCompare(tempItem,inputData)!=1)  && (tempItem!=(tempList->tail))){
+		while((getNameFromDictionaryAndCompare(tempItem,inputData)!=1)  && (tempItem!=(tempList->tail))){
 			//check until tail
 			tempItem = tempItem->next;
 		}
-		if(getNameFormDictionaryAndCompare(tempItem,inputData)!=1){//check tail
+		if(getNameFromDictionaryAndCompare(tempItem,inputData)!=1){//check tail
 			throwError(1,"ERROR %d: '%s' is not found in the Dictionary.",1,(error));
 		}else{
 			return tempItem;
@@ -196,7 +196,7 @@ ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData){
  * 2.) toLower
  * 3.) stringCompare
  */
-int getNameFormDictionaryAndCompare(ListItem * item, char* inputData){
+int getNameFromDictionaryAndCompare(ListItem * item, char* inputData){
 	char * tempData1 = ((Dictionary*)(item->data))->name;//get data from item
 	char * tempData2 = extractWork(tempData1);
 	char * tempDataResult = toLower(tempData2);
@@ -324,11 +324,11 @@ int SearchAvoidSameWork(LinkedList * linkedList, char* name){
 		return 1;
 	}else{
 		ListItem *tempItem = tempList->head;
-		while((getNameFormDictionaryAndCompare(tempItem,name)==0)  && (tempItem!=(tempList->tail))){
+		while((getNameFromDictionaryAndCompare(tempItem,name)==0)  && (tempItem!=(tempList->tail))){
 			//check until tail
 			tempItem = tempItem->next;
 		}
-		if(getNameFormDictionaryAndCompare(tempItem,name)==0){//check tail
+		if(getNameFromDictionaryAndCompare(tempItem,name)==0){//check tail
 			return 1;//cant find work from dictionary.
 		}else{
 			throwError(2,"ERROR %d: '%s' is already in the Dictionary.",2,(error));

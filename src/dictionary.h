@@ -49,7 +49,7 @@ void linkedListRemoveLast(LinkedList * linkedList);
 ListItem* dataSearch(LinkedList * linkedList, void * inputData);
 //funtion Dictionary
 void linkedListSearchRemove(LinkedList * linkedList, void * inputData);
-int getNameFormDictionaryAndCompare(ListItem * item, char* inputData);
+int getNameFromDictionaryAndCompare(ListItem * item, char* inputData);
 ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData);
 void SearchAndRemoveDictionary(LinkedList * linkedList, void* inputData);
 char* find1stNonSpace(char * name);

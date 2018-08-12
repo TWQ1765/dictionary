@@ -880,7 +880,7 @@ void test_linkedListSearchRemove_given_data_int_1_expect_count_3_item1_remove(vo
 	TEST_ASSERT_EQUAL(NULL, list.head->pervious);
 	TEST_ASSERT_EQUAL(3, list.count);
 }//*/
-void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_expect_true(void){
+void test_getNameFromDictionaryAndCompare_given_dataName_amoeba_expect_true(void){
 	char* dataName = "amoeba";
 	char *name1 = "amoeba";
 	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
@@ -888,12 +888,12 @@ void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_expect_true(void
 	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
 	
 	int result = 2;
-	result = getNameFormDictionaryAndCompare(&itemDataA, dataName);
+	result = getNameFromDictionaryAndCompare(&itemDataA, dataName);
 	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
 	TEST_ASSERT_TRUE(result);
 	
 }
-void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_trailing_space_expect_true(void){
+void test_getNameFromDictionaryAndCompare_given_dataName_amoeba_trailing_space_expect_true(void){
 	char* dataName = "amoeba ";
 	char *name1 = "amoeba";
 	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
@@ -901,12 +901,12 @@ void test_getNameFormDictionaryAndCompare_given_dataName_amoeba_trailing_space_e
 	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
 	
 	int result = 2;
-	result = getNameFormDictionaryAndCompare(&itemDataA,dataName);
+	result = getNameFromDictionaryAndCompare(&itemDataA,dataName);
 	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
 	TEST_ASSERT_TRUE(result);
 	
 }
-void test_getNameFormDictionaryAndCompare_given_dataName_amoebe_expect_flase(void){
+void test_getNameFromDictionaryAndCompare_given_dataName_amoebe_expect_flase(void){
 	char* dataName = "amoebe";
 	char *name1 = "amoeba";
 	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
@@ -914,11 +914,11 @@ void test_getNameFormDictionaryAndCompare_given_dataName_amoebe_expect_flase(voi
 	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
 	
 	int result = 2;
-	result = getNameFormDictionaryAndCompare(&itemDataA, dataName);
+	result = getNameFromDictionaryAndCompare(&itemDataA, dataName);
 	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
 	TEST_ASSERT_FALSE(result);
 }
-void test_getNameFormDictionaryAndCompare_given_dataName_Amoeba_expect_TRUE(void){
+void test_getNameFromDictionaryAndCompare_given_dataName_Amoeba_expect_TRUE(void){
 	char* dataName = "Amoeba";
 	char *name1 = "amoeba";
 	char *defination1 = "Is a type of microorganism, one-celled animal, also spelled ameba.";
@@ -926,7 +926,7 @@ void test_getNameFormDictionaryAndCompare_given_dataName_Amoeba_expect_TRUE(void
 	ListItem  itemDataA = {.next=NULL, .data=(void*)&dictionary1};
 	
 	int result = 2;
-	result = getNameFormDictionaryAndCompare(&itemDataA, dataName);
+	result = getNameFromDictionaryAndCompare(&itemDataA, dataName);
 	TEST_ASSERT_EQUAL(name1, ((Dictionary*)(itemDataA.data))->name);
 	TEST_ASSERT_TRUE(result);
 }
