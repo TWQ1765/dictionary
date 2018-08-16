@@ -4,6 +4,8 @@
 #include 	<Exception.h>
 #include 	"Exception.h"
 #include 	"CException.h"
+#include	<malloc.h>
+#include	<stdlib.h>
 void setUp(void)
 {}
 void tearDown(void)
@@ -1027,7 +1029,7 @@ void test_searchItemFromDictionary_given_empty_list_and_amoebe_expect_throw_erro
  *	count = 3										count = 2
  */
  //*
-void test_SearchAndRemoveDictionary_given_data_string_bacterium_expect_remove_itemB_count_2(void){
+void test_removeDictionaryElement_given_data_string_bacterium_expect_remove_itemB_count_2(void){
 	char *name1 = "amoeba";
 	char *name2 = "bacterium";
 	char *name3 = "Carnotaurus";
@@ -1059,7 +1061,7 @@ void test_SearchAndRemoveDictionary_given_data_string_bacterium_expect_remove_it
 	TEST_ASSERT_EQUAL(itemC, list.tail);
 	TEST_ASSERT_EQUAL(3,list.count);
 	
-	SearchAndRemoveDictionary(&list,(void*)name2);
+	removeDictionaryElement(&list,(void*)name2);
 	TEST_ASSERT_EQUAL(itemA, list.head);
 	TEST_ASSERT_EQUAL(itemC, list.head->next);
 	TEST_ASSERT_EQUAL(NULL, list.head->next->next);
@@ -1081,7 +1083,7 @@ void test_SearchAndRemoveDictionary_given_data_string_bacterium_expect_remove_it
  *	count = 3										count = 1
  */
  //*
-void test_SearchAndRemoveDictionary_given_bacterium_and_Carnotaurus_expect_remove_itemB_and_C_count_1(void){
+void test_removeDictionaryElement_given_bacterium_and_Carnotaurus_expect_remove_itemB_and_C_count_1(void){
 	char *name1 = "amoeba";
 	char *name2 = "bacterium";
 	char *name3 = "Carnotaurus";
@@ -1113,8 +1115,8 @@ void test_SearchAndRemoveDictionary_given_bacterium_and_Carnotaurus_expect_remov
 	TEST_ASSERT_EQUAL(itemC, list.tail);
 	TEST_ASSERT_EQUAL(3,list.count);
 	
-	SearchAndRemoveDictionary(&list,(void*)name2);//bacterium
-	SearchAndRemoveDictionary(&list,(void*)name3);//Carnotaurus
+	removeDictionaryElement(&list,(void*)name2);//bacterium
+	removeDictionaryElement(&list,(void*)name3);//Carnotaurus
 	TEST_ASSERT_EQUAL(itemA, list.head);
 	TEST_ASSERT_EQUAL(NULL, list.head->next);
 	TEST_ASSERT_EQUAL(itemA, list.tail);
@@ -1135,7 +1137,7 @@ void test_SearchAndRemoveDictionary_given_bacterium_and_Carnotaurus_expect_remov
  *	count = 3										count = 0
  */
  //*
-void test_SearchAndRemoveDictionary_given_amoeba_bacterium_and_Carnotaurus_expect_remove_itemB_A_and_C_count_0(void){
+void test_removeDictionaryElement_given_amoeba_bacterium_and_Carnotaurus_expect_remove_itemB_A_and_C_count_0(void){
 	char *name1 = "amoeba";
 	char *name2 = "bacterium";
 	char *name3 = "Carnotaurus";
@@ -1167,9 +1169,9 @@ void test_SearchAndRemoveDictionary_given_amoeba_bacterium_and_Carnotaurus_expec
 	TEST_ASSERT_EQUAL(itemC, list.tail);
 	TEST_ASSERT_EQUAL(3,list.count);
 	
-	SearchAndRemoveDictionary(&list,(void*)name1);//amoeba
-	SearchAndRemoveDictionary(&list,(void*)name2);//bacterium
-	SearchAndRemoveDictionary(&list,(void*)name3);//Carnotaurus
+	removeDictionaryElement(&list,(void*)name1);//amoeba
+	removeDictionaryElement(&list,(void*)name2);//bacterium
+	removeDictionaryElement(&list,(void*)name3);//Carnotaurus
 	TEST_ASSERT_EQUAL(NULL, list.head);
 	TEST_ASSERT_EQUAL(NULL, list.tail);
 	TEST_ASSERT_EQUAL(0,list.count);
@@ -1187,7 +1189,7 @@ void test_SearchAndRemoveDictionary_given_amoeba_bacterium_and_Carnotaurus_expec
  *											--					
  *	count = 3										
  */
-void test_SearchAndRemoveDictionary_given_amoebali_trailing_space_expect_throw_error_1_count_3(void){
+void test_removeDictionaryElement_given_amoebali_trailing_space_expect_throw_error_1_count_3(void){
 	char *name1 = "amoeba";
 	char *name2 = "bacterium";
 	char *name3 = "Carnotaurus";
@@ -1225,7 +1227,7 @@ void test_SearchAndRemoveDictionary_given_amoebali_trailing_space_expect_throw_e
 		TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
 		TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->next->data))->name);
 		
-		SearchAndRemoveDictionary(&list,(void*)name4);//"amoebali "
+		removeDictionaryElement(&list,(void*)name4);//"amoebali "
 		TEST_FAIL_MESSAGE("Expect DATA_NOT_FOUND. But no exception thrown.");
 	} Catch(e){
 		printf(e->errorMsg);
@@ -1245,7 +1247,7 @@ void test_SearchAndRemoveDictionary_given_amoebali_trailing_space_expect_throw_e
  *											--									--		
  *	count = 3										count = 2
  */
-void test_SearchAndRemoveDictionary_given_Amoeba_expect_count_2(void){
+void test_removeDictionaryElement_given_Amoeba_expect_count_2(void){
 	char *name1 = "amoeba";
 	char *name2 = "bacterium";
 	char *name3 = "Carnotaurus";
@@ -1281,7 +1283,7 @@ void test_SearchAndRemoveDictionary_given_Amoeba_expect_count_2(void){
 	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->data))->name);
 	TEST_ASSERT_EQUAL_STRING(name3,((Dictionary*)(list.head->next->next->data))->name);
 	///remove itemA	
-	SearchAndRemoveDictionary(&list,(void*)name4);//"Amoeba"
+	removeDictionaryElement(&list,(void*)name4);//"Amoeba"
 	TEST_ASSERT_EQUAL(itemB, list.head);
 	TEST_ASSERT_EQUAL(itemC, list.head->next);
 	TEST_ASSERT_EQUAL(NULL, list.head->next->next);
@@ -1302,7 +1304,7 @@ void test_SearchAndRemoveDictionary_given_Amoeba_expect_count_2(void){
  *			--					
  *	count = 0									
  */
-void test_SearchAndRemoveDictionary_given_empty_LinkList_and_amoeba_expect_error_1(void){
+void test_removeDictionaryElement_given_empty_LinkList_and_amoeba_expect_error_1(void){
 	char *name = "amoeba";
 	LinkedList list;
 	///initialise empty linklist
@@ -1314,7 +1316,7 @@ void test_SearchAndRemoveDictionary_given_empty_LinkList_and_amoeba_expect_error
 		TEST_ASSERT_NULL(list.head);		
 		TEST_ASSERT_NULL(list.tail);
 		TEST_ASSERT_EQUAL(0,list.count);
-		SearchAndRemoveDictionary(&list,(void*)name);//"amoeba"
+		removeDictionaryElement(&list,(void*)name);//"amoeba"
 		TEST_FAIL_MESSAGE("Expect DATA_NOT_FOUND. But no exception thrown.");
 	} Catch(e){
 		printf(e->errorMsg);
@@ -1543,12 +1545,12 @@ void test_SearchAndAddDictionary_given_empty_linklist_expect_count2(void){
 	
 	listInit(&list);//initialise empty linklist
 	
-	SearchAndAddDictionary(&list, itemB, ADD_HEAD);
+	addDictionaryIfNotExist(&list, itemB, ADD_HEAD);
 	TEST_ASSERT_EQUAL(1,list.count);
 	TEST_ASSERT_EQUAL(itemB, list.head);
 	TEST_ASSERT_EQUAL(itemB, list.tail);
 	
-	SearchAndAddDictionary(&list, itemA, ADD_TAIL);
+	addDictionaryIfNotExist(&list, itemA, ADD_TAIL);
 	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.head->next->data))->name);
 	TEST_ASSERT_EQUAL_STRING(name1,((Dictionary*)(list.tail->data))->name);
 	TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->data))->name);
@@ -1566,7 +1568,7 @@ void test_SearchAndAddDictionary_given_empty_linklist_expect_count2(void){
  *			--						--			
  *	count = 0		count = 1					
  */
-void test_SearchAndAddDictionary_given_same_item_add_head_expect_throw_error_2(void){
+void test_addDictionaryIfNotExist_given_same_item_add_head_expect_throw_error_2(void){
 	char *name1 = "tail";
 	char *name2 = "head";
 	char *defination1 = "a part of an animal's body, sticking out from the base of the back";
@@ -1583,13 +1585,13 @@ void test_SearchAndAddDictionary_given_same_item_add_head_expect_throw_error_2(v
 	
 	listInit(&list);//initialise empty linklist
 	
-	SearchAndAddDictionary(&list, itemA, ADD_HEAD);
+	addDictionaryIfNotExist(&list, itemA, ADD_HEAD);
 	TEST_ASSERT_EQUAL(1,list.count);
 	TEST_ASSERT_EQUAL(itemA, list.head);
 	TEST_ASSERT_EQUAL(itemA, list.tail);
 	CEXCEPTION_T e;
 	Try {
-		SearchAndAddDictionary(&list, itemA, ADD_HEAD);
+		addDictionaryIfNotExist(&list, itemA, ADD_HEAD);
 		TEST_FAIL_MESSAGE("Expect DATA_ALREEADY_EXIST. But no exception thrown.");
 	} Catch(e){
 		printf(e->errorMsg);
@@ -1606,7 +1608,7 @@ void test_SearchAndAddDictionary_given_same_item_add_head_expect_throw_error_2(v
  *			--						--			
  *	count = 0		count = 1					
  */
-void test_SearchAndAddDictionary_given_same_item_add_tail_expect_throw_error_2(void){
+void test_addDictionaryIfNotExist_given_same_item_add_tail_expect_throw_error_2(void){
 	char *name1 = "tail";
 	char *name2 = "head";
 	char *defination1 = "a part of an animal's body, sticking out from the base of the back";
@@ -1623,13 +1625,13 @@ void test_SearchAndAddDictionary_given_same_item_add_tail_expect_throw_error_2(v
 	
 	listInit(&list);//initialise empty linklist
 	
-	SearchAndAddDictionary(&list, itemB, ADD_HEAD);
+	addDictionaryIfNotExist(&list, itemB, ADD_HEAD);
 	TEST_ASSERT_EQUAL(1,list.count);
 	TEST_ASSERT_EQUAL(itemB, list.head);
 	TEST_ASSERT_EQUAL(itemB, list.tail);
 	CEXCEPTION_T e;
 	Try {
-		SearchAndAddDictionary(&list, itemB, ADD_TAIL);
+		addDictionaryIfNotExist(&list, itemB, ADD_TAIL);
 		TEST_FAIL_MESSAGE("Expect DATA_ALREEADY_EXIST. But no exception thrown.");
 	} Catch(e){
 		printf(e->errorMsg);
@@ -1734,7 +1736,7 @@ void test_getDefination_given_name_nonExist_in_linklist_expect_throw_error1(void
  *	count = 4									count = 4	
  *
  */
-void test_SearchAndRemoveDictionary_then_SearchAndAddDictionary_expect_return_count_4(void){
+void test_removeDictionaryElement_then_addDictionaryIfNotExit_expect_return_count_4(void){
 	char *name1 = "amoeba";
 	char *name2 = "bacterium";
 	char *name3 = "Carnotaurus";
@@ -1776,7 +1778,7 @@ void test_SearchAndRemoveDictionary_then_SearchAndAddDictionary_expect_return_co
 	TEST_ASSERT_EQUAL_STRING(name4,((Dictionary*)(list.head->next->next->next->data))->name);
 	TEST_ASSERT_EQUAL(4,list.count);
 	//remove itemB
-	SearchAndRemoveDictionary(&list,(void*)name2);//"bacterium"
+	removeDictionaryElement(&list,(void*)name2);//"bacterium"
 	TEST_ASSERT_EQUAL(itemA, list.head);
 	TEST_ASSERT_EQUAL(itemC, list.head->next);
 	TEST_ASSERT_EQUAL(itemD, list.head->next->next);
@@ -1787,7 +1789,7 @@ void test_SearchAndRemoveDictionary_then_SearchAndAddDictionary_expect_return_co
 	TEST_ASSERT_EQUAL_STRING(name4,((Dictionary*)(list.head->next->next->data))->name);
 	TEST_ASSERT_EQUAL(3,list.count);
 	//add tail
-	SearchAndAddDictionary(&list, itemB, ADD_TAIL);
+	addDictionaryIfNotExist(&list, itemB, ADD_TAIL);
 	TEST_ASSERT_EQUAL(itemA, list.head);
 	TEST_ASSERT_EQUAL(itemC, list.head->next);
 	TEST_ASSERT_EQUAL(itemD, list.head->next->next);
@@ -1799,4 +1801,5 @@ void test_SearchAndRemoveDictionary_then_SearchAndAddDictionary_expect_return_co
 	TEST_ASSERT_EQUAL_STRING(name4,((Dictionary*)(list.head->next->next->data))->name);
 	TEST_ASSERT_EQUAL_STRING(name2,((Dictionary*)(list.head->next->next->next->data))->name);
 	TEST_ASSERT_EQUAL(4,list.count);
+	//freeDictionary(list);
 }

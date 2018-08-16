@@ -188,18 +188,20 @@ int getNameFromDictionaryAndCompare(ListItem * item, char* inputData){
 	char * tempDataResult = toLower(tempData2);
 	char * inputData1 = extractWork(inputData);
 	char * inputDataResult = toLower(inputData1);
+	
 	int result = stringCompare(tempDataResult,inputDataResult);
+	
 	return result;
 }
 /* how to differentiate void* data point to struct or int,char type?
  * no way to do that. so this fuction is only for void* data point to struct.
  * to remove paticular item from linkedList.
  */
-void SearchAndRemoveDictionary(LinkedList * linkedList, void* inputData){
-	ListItem *tempItem = searchItemFromDictionary(linkedList, inputData);//find item addr
+void removeDictionaryElement(LinkedList * linkedList, void* inputData){
+	ListItem* tempItem = searchItemFromDictionary(linkedList, inputData);//find item addr
 	
-	ListItem * itemNext = tempItem->next;
-	ListItem * itemPerv = tempItem->pervious;
+	ListItem* itemNext = tempItem->next;
+	ListItem* itemPerv = tempItem->pervious;
 	int numNext = 0;
 	if(itemNext == NULL && itemPerv != NULL)//the 1st item
 	{
@@ -249,7 +251,7 @@ char* createWordTolower(char* name , int length){
  * function needed: 
  * 1.) find1stNonSpace
  * 2.) getWordLength
- * 3.) createWord
+ * 3.) createWordTolower
  */
 char* extractWork(char* name){
 	int len = 0;
@@ -272,10 +274,8 @@ char* toLower(char * line){
 	return strLower;
 }
 
-//can be improve by adding sensitivity
 int stringCompare(char* testStr,char *inputStr){
 	int i=0;
-	int sensitivity = 0;
 	int testStrLen = strlen(testStr);
 	int inputStrLen = strlen(inputStr);
 	if (testStrLen!=inputStrLen){
@@ -285,7 +285,6 @@ int stringCompare(char* testStr,char *inputStr){
 			if((testStr[i]) != (inputStr[i])){
 				return 0;
 			}else{
-				sensitivity++;
 				i++;
 			}
 		}
@@ -319,11 +318,7 @@ int SearchAvoidSameWork(LinkedList * linkedList, char* name){
 		}
 	}
 }
-void freeDictionary(LinkedList *list){
-  //if(list.head->){
-   // free(item);
-  //}
-}
+
 /* adding item into linkedList
  * addMode = {ADD_HEAD || ADD_TAIL}
  * ADD_HEAD = 0
@@ -333,7 +328,7 @@ void freeDictionary(LinkedList *list){
  * 2.) linkedListAddToHead
  * 3.) linkedListAddToTail
  */
-void SearchAndAddDictionary(LinkedList* linkedList, ListItem* listItem, int addMode){
+void addDictionaryIfNotExist(LinkedList* linkedList, ListItem* listItem, int addMode){
 	int result = 0;
 	if(addMode == ADD_HEAD){
 		result = SearchAvoidSameWork(linkedList,((Dictionary*)(listItem->data))->name);
@@ -354,3 +349,11 @@ char* getDefination(LinkedList* linkedList, char* name){
 	char* defination = ((Dictionary*)(tempItem->data))->defination;
 }
 //test
+/*
+void freeDictionary(void *list){
+  if(list){
+	free(list);
+	//free(((Dictionary*)(list->head->data))->name);
+  }
+ 
+}*/

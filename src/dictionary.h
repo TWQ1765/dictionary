@@ -51,17 +51,16 @@ ListItem* dataSearch(LinkedList * linkedList, void * inputData);
 void linkedListSearchRemove(LinkedList * linkedList, void * inputData);
 int getNameFromDictionaryAndCompare(ListItem * item, char* inputData);
 ListItem* searchItemFromDictionary(LinkedList * linkedList, char* inputData);
-void SearchAndRemoveDictionary(LinkedList * linkedList, void* inputData);
+void removeDictionaryElement(LinkedList * linkedList, void* inputData);//change name
 char* find1stNonSpace(char * name);
 int getWordLength(char* name);
 char* createWordTolower(char* name , int length);
 char* extractWork(char* name);
-void freeDictionary(LinkedList *list);//void*
 char*toLower(char * line);
 int stringCompare(char* testStr,char *inputStr);
 int SearchAvoidSameWork(LinkedList * linkedList, char* name);
-void SearchAndAddDictionary(LinkedList* linkedList, ListItem* listItem, int addMode);
+void addDictionaryIfNotExist(LinkedList* linkedList, ListItem* listItem, int addMode);//change name "SearchAndAddDictionary" yo "addDictionaryIfNotExist"
 char* getDefination(LinkedList* linkedList, char* name);
-
+//void freeDictionary(void *list);//void*
 
 #endif // _DICTIONARY_H
