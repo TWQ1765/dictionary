@@ -62,6 +62,6 @@ int stringCompare(char* testStr,char *inputStr);
 int SearchAvoidSameWork(LinkedList * linkedList, char* name);
 void SearchAndAddDictionary(LinkedList* linkedList, ListItem* listItem, int addMode);
 char* getDefination(LinkedList* linkedList, char* name);
-//just test
+
 
 #endif // _DICTIONARY_H

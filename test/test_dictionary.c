@@ -45,23 +45,6 @@ void test_testSomething_understanding_for_pointers(void){
 	ListItem * itemString = &itemData2;
 	ListItem * itemDictionary = &itemData3;
 	
-	//printf("list->count=%d\n",(list.count));
-	///->print data as int.
-	//printf("item->data=%d\n",*(int*)((*item).data));
-	///->print data as string.
-	//printf("itemString->data=%s\n",(char*)(((*itemString).data))+0); 
-	
-	///-> directly print dictionary
-	//printf("dictionary->name=%s\n",dictionary.name); 
-	//printf("dictionary->defination=%s\n",dictionary.defination); 
-	
-	///->print data as struct type.
-	//Dictionary *temp = (Dictionary*)(itemDictionary->data);
-	//printf("itemDictionary->name=%s\n",temp->name); 
-	
-	//printf("itemDictionary->name=%s\n",((Dictionary*)(itemDictionary->data))->name); 
-	//printf("itemDictionary->defination=%s\n",((Dictionary*)(itemDictionary->data))->defination); 
-	
 	TEST_ASSERT_EQUAL(1,*(int*)((*item).data));//*(int*)(item->data)
 	TEST_ASSERT_EQUAL_STRING("asd",(char*)(((*itemString).data)));
 	TEST_ASSERT_EQUAL_STRING("hi",((Dictionary*)(itemDictionary->data))->name);
@@ -88,8 +71,6 @@ void test_linkedListAddToHead_given_1_expect_item_inserted(void){
 	ListItem * item = &itemData;
 	
 	linkedListAddToHead(&list, item);
-	//printf("list.tail=%d\n",list.tail);
-	//printf("item=%d\n",item);
 	
 	TEST_ASSERT_EQUAL(1,*(int*)((*item).data));
 	TEST_ASSERT_EQUAL(item, list.tail);
@@ -152,8 +133,6 @@ void test_linkedListAddToHead_given_linked_list_with_item_2_add_item_3_expect_3_
 	ListItem * item2 = &itemData2;
 	
 	linkedListAddToHead(&list, item3);
-	//printf("list.head->data =%d\n",*(int*)(list.head->data));//print item3 punya data
-	//printf("list.head->next->data =%d\n",*(int*)(list.head->next->data));//print item2 punya data
 	TEST_ASSERT_EQUAL(item3, list.head);
 	TEST_ASSERT_EQUAL(item2, list.tail);
 	TEST_ASSERT_EQUAL(item2, item3->next);
@@ -1384,7 +1363,6 @@ void test_toLower_given_HeLLO_expect_return_hello(void){
 	char *name1 = "HeLLO";
 	char* resultStr = toLower(name1);
 	TEST_ASSERT_EQUAL_STRING("hello",resultStr);
-	//free(resultStr);//
 }
 void test_stringCompare_given_amoeba_expect_return_TRUE(void){
 	char* dataName = "amoeba";
@@ -1494,7 +1472,6 @@ void test_SearchAvoidSameWork_given_Spacex2_Amoeba_2tailling_spaceexpect_throw_e
 		printf(e->errorMsg);
 		TEST_ASSERT_EQUAL(DATA_ALREEADY_EXIST, e->errorCode);
 		freeError(e);
-		//freeDictionary(list.head);
     }
 }
 void test_SearchAvoidSameWork_given_amoebe_expect_return_1(void){

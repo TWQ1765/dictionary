@@ -65,8 +65,6 @@ void linkedListAddToTail(LinkedList * linkedList , ListItem* listItem){
 	else{
 		linkedList -> count += 1;
 		previousAddr = linkedList -> tail;
-		//printf("previousAddr=%d\n",previousAddr);
-		//printf("linkedList->head->next=%d\n",linkedList->head->next);
 		linkedList -> head -> pervious = NULL;
 		linkedList -> tail = listItem;
 		previousAddr->next = listItem;
@@ -91,14 +89,11 @@ void linkedListRemoveFrist(LinkedList * linkedList){
 void linkedListRemoveLast(LinkedList * linkedList){
 	ListItem* tempTailAddr = 0;
 	
-	//printf("linkedList=%d",linkedList);
-	
 	if(linkedList->head == NULL){
 		linkedList->head = NULL;
 		linkedList->tail =NULL;
 		linkedList->count = 0;
 	}else{
-		//tempTailAddr = linkedList->tail;  
 		tempTailAddr = linkedList->tail->pervious ;
 		linkedList->tail = tempTailAddr;
 		linkedList->tail->next = NULL;
@@ -147,19 +142,10 @@ ListItem* dataSearch(LinkedList * linkedList, void* inputData){
 		return NULL;
 	}else{
 		ListItem *tempItem = tempList->head;
-		/*just testing
-		if (tempItem->next->next->data != inputData){//given 1
-			return (ListItem*)100;
-		}
-		else{
-			return (ListItem*)101;
-		}
-		*/
 		while((tempItem->data != inputData) && (tempItem!=(tempList->tail))){//check until tail
 			tempItem = tempItem->next;
 		}
 		if(tempItem->data != inputData){//check tail
-			//return tempItem = tempItem->next; 
 			throwError(1,"ERROR %d: '%s' is not found in the Dictionary.",1,(error));
 		}else{
 			return tempItem;
@@ -202,8 +188,6 @@ int getNameFromDictionaryAndCompare(ListItem * item, char* inputData){
 	char * tempDataResult = toLower(tempData2);
 	char * inputData1 = extractWork(inputData);
 	char * inputDataResult = toLower(inputData1);
-	//printf("is tempDataResult=%s\n",tempDataResult);
-	//printf("is inputDataResult=%s\n",inputDataResult);
 	int result = stringCompare(tempDataResult,inputDataResult);
 	return result;
 }
